@@ -1,0 +1,1 @@
+C:\Users\Wallace\Documents\Visual Studio 2012\Projects\VideoMessage\VideoMessage.csproj;neutral
