@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows 8
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoMessage", "VideoMessage.csproj", "{E64D257B-3942-4630-B06C-B8A45B12587D}"
 EndProject
 Global

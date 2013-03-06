@@ -1,1 +1,1 @@
-C:\Users\Wallace\Documents\Visual Studio 2012\Projects\VideoMessage\VideoMessage.csproj;neutral
+C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\VideoMessage.csproj;neutral
