@@ -19,6 +19,7 @@ using Windows.Media;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Net;
+using Newtonsoft.Json.Linq;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -35,6 +36,7 @@ namespace VideoMessage
         private readonly String VIDEO_FILE_NAME = "video.mp4";
         private Windows.Storage.StorageFile m_recordStorageFile;
         HttpClient httpClient;
+        String accessToken;
 
         private MediaExtensionManager extensions = new MediaExtensionManager();
         
@@ -200,7 +202,11 @@ namespace VideoMessage
                 HttpResponseMessage response = await httpClient.PostAsync("https://wamsprodglobal001acs.accesscontrol.windows.net/v2/OAuth2-13", form);
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
-                    String responseString = await response.Content.ReadAsStringAsync();
+                    String responseBodyAsText = await response.Content.ReadAsStringAsync();
+                    JObject jsonObj = JObject.Parse(responseBodyAsText);
+
+                    accessToken = (String) jsonObj["access_token"];
+                    btnSend.IsEnabled = false;
                 }
             }
             catch (HttpRequestException hre)

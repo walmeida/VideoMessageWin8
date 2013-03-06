@@ -118,6 +118,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="packages.config" />
     <None Include="VideoMessage_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +149,12 @@
     <SDKReference Include="Microsoft.VCLibs, Version=11.0">
       <Name>Microsoft Visual C++ Runtime Package</Name>
     </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>packages\Newtonsoft.Json.4.5.11\lib\winrt45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>

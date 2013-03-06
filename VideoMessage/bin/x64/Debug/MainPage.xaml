@@ -33,7 +33,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:ConnectionId='3' x:Name="backButton"                IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
+            <Button x:ConnectionId='5' x:Name="backButton"                IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
             <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
         </Grid>
 
@@ -47,12 +47,17 @@
                     <TextBlock x:Name="OutputName" Style="{StaticResource HeaderTextStyle}" Margin="3,3,0,3"/>
                     <TextBlock x:Name="OutputEmailHeader" Style="{StaticResource TitleTextStyle}" Visibility="Collapsed">Emails</TextBlock>
                     <TextBlock x:Name="OutputEmails" Style="{StaticResource BasicTextStyle}"/>
-                    <Button x:Name="btnSend" IsEnabled="false"  Margin="0,0,10,0">Enviar</Button>
+                    <Button x:ConnectionId='4' x:Name="btnSend"                          IsEnabled="false"  Margin="0,0,10,0">Enviar</Button>
+                </StackPanel>
+                <StackPanel Name="spMediaElement" Grid.Row="2" Height="480" Width="640" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <MediaElement x:Name="mediaElement" Height="356" Width="924" MinHeight="225" HorizontalAlignment="Center" VerticalAlignment="Center" AudioCategory="BackgroundCapableMedia" AutoPlay="False"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Grid.Row="1">
                 <Button x:ConnectionId='1' x:Name="btnStartStopRecord"                                  IsEnabled="false"  Margin="0,0,10,0">Gravar</Button>
                 <Button x:ConnectionId='2' x:Name="btnSelectFriend"                                  IsEnabled="false"  Margin="0,0,10,0">Selecionar Amigo</Button>
+                <Button x:ConnectionId='3' x:Name="btnPlayMensagem"                               IsEnabled="true"  Margin="0,0,10,0">Ver Mensagem</Button>
+                <TextBox x:Name="txtStatus" FontSize="10" Width="700" VerticalAlignment="Center"/>
             </StackPanel>
         </StackPanel>
 
