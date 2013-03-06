@@ -21,3 +21,26 @@ c:\users\wallace\documents\visual studio 2012\Projects\VideoMessage\obj\Debug\re
 c:\users\wallace\documents\visual studio 2012\Projects\VideoMessage\obj\Debug\pri.resfiles
 c:\users\wallace\documents\visual studio 2012\Projects\VideoMessage\obj\Debug\LanguageQualifiers.txt
 c:\users\wallace\documents\visual studio 2012\Projects\VideoMessage\obj\Debug\ProjectArchitectures.txt
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\Debug\App.g.i.cs
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\Debug\App.g.cs
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\Debug\MainPage.g.i.cs
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\Debug\MainPage.g.cs
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\Debug\Common\StandardStyles.g.i.cs
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\Debug\Common\StandardStyles.g.cs
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\Debug\XamlTypeInfo.g.cs
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\Debug\App.xaml
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\Debug\MainPage.xaml
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\Debug\Common\StandardStyles.xaml
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\Debug\VideoMessage.exe
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\Debug\VideoMessage.pdb
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\bin\Debug\VideoMessage.exe
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\bin\Debug\VideoMessage.pdb
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\bin\Debug\resources.pri
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\bin\Debug\AppxManifest.xml
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\bin\Debug\VideoMessage.build.appxrecipe
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\Debug\priconfig.xml
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\Debug\layout.resfiles
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\Debug\resources.resfiles
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\Debug\pri.resfiles
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\Debug\LanguageQualifiers.txt
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\Debug\ProjectArchitectures.txt

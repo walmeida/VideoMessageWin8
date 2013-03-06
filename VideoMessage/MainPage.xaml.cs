@@ -15,6 +15,9 @@ using Windows.Media.Capture;
 using Windows.Media.MediaProperties;
 using Windows.UI.Xaml.Media.Imaging;
 using System.Text;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Net;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -29,6 +32,7 @@ namespace VideoMessage
         private bool m_bRecording;
         private readonly String VIDEO_FILE_NAME = "video.mp4";
         private Windows.Storage.StorageFile m_recordStorageFile;
+        HttpClient httpClient;
         
         public MainPage()
         {
@@ -171,6 +175,29 @@ namespace VideoMessage
                 header.Visibility = Visibility.Collapsed;
                 content.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private async void SendButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                httpClient = new HttpClient();
+                FormUrlEncodedContent form = new FormUrlEncodedContent(new System.Collections.Generic.Dictionary<string, string> { { "grant_type", "client_credentials" }, { "client_id", "videomessagems" }, { "client_secret", "+yaQ3dn0uZ/8wHHFYtAkVp9XiabClBHd5IGJwf2g2io=" }, { "scope", "urn:WindowsAzureMediaServices" } });
+                HttpResponseMessage response = await httpClient.PostAsync("https://wamsprodglobal001acs.accesscontrol.windows.net/v2/OAuth2-13", form);
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    String responseString = await response.Content.ReadAsStringAsync();
+                }
+            }
+            catch (HttpRequestException hre)
+            {
+                
+            }
+            catch (TaskCanceledException)
+            {
+                
+            }
+
         }
 
         /// <summary>

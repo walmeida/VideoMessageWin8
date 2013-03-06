@@ -47,7 +47,7 @@
                     <TextBlock x:Name="OutputName" Style="{StaticResource HeaderTextStyle}" Margin="3,3,0,3"/>
                     <TextBlock x:Name="OutputEmailHeader" Style="{StaticResource TitleTextStyle}" Visibility="Collapsed">Emails</TextBlock>
                     <TextBlock x:Name="OutputEmails" Style="{StaticResource BasicTextStyle}"/>
-                    <Button x:Name="btnSend" IsEnabled="false"  Margin="0,0,10,0">Enviar</Button>
+                    <Button x:Name="btnSend" Click="SendButton_Click" IsEnabled="false"  Margin="0,0,10,0">Enviar</Button>
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Grid.Row="1">

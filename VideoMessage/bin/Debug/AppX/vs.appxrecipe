@@ -13,58 +13,58 @@
     <RegisteredVersion>1.0.0.0</RegisteredVersion>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="C:\Users\Wallace\Documents\Visual Studio 2012\Projects\VideoMessage\bin\Debug\AppxManifest.xml">
+    <AppXManifest Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\bin\Debug\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2013-02-26T20:10:23.925</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Visual Studio 2012\Projects\VideoMessage\bin\Debug\VideoMessage.exe">
+    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\bin\Debug\VideoMessage.exe">
       <PackagePath>VideoMessage.exe</PackagePath>
-      <Modified>2013-02-28T14:27:10.722</Modified>
+      <Modified>2013-03-06T00:00:42.372</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Visual Studio 2012\Projects\VideoMessage\bin\Debug\VideoMessage.pdb">
+    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\bin\Debug\VideoMessage.pdb">
       <PackagePath>VideoMessage.pdb</PackagePath>
-      <Modified>2013-02-28T14:27:10.705</Modified>
+      <Modified>2013-03-06T00:00:42.350</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Visual Studio 2012\Projects\VideoMessage\Assets\Logo.png">
+    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\Assets\Logo.png">
       <PackagePath>Assets\Logo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2012-03-15T23:42:52.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Visual Studio 2012\Projects\VideoMessage\Assets\SmallLogo.png">
+    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\Assets\SmallLogo.png">
       <PackagePath>Assets\SmallLogo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2012-03-15T23:42:52.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Visual Studio 2012\Projects\VideoMessage\Assets\SplashScreen.png">
+    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\Assets\SplashScreen.png">
       <PackagePath>Assets\SplashScreen.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2012-03-15T23:42:52.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Visual Studio 2012\Projects\VideoMessage\Assets\StoreLogo.png">
+    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\Assets\StoreLogo.png">
       <PackagePath>Assets\StoreLogo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2012-03-15T23:42:52.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Visual Studio 2012\Projects\VideoMessage\Common\ReadMe.txt">
+    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\Common\ReadMe.txt">
       <PackagePath>Common\ReadMe.txt</PackagePath>
       <Modified>2013-02-26T18:28:33.415</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Visual Studio 2012\Projects\VideoMessage\bin\Debug\App.xaml">
+    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\bin\Debug\App.xaml">
       <PackagePath>App.xaml</PackagePath>
       <Modified>2013-02-26T18:35:25.280</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Visual Studio 2012\Projects\VideoMessage\bin\Debug\MainPage.xaml">
+    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\bin\Debug\MainPage.xaml">
       <PackagePath>MainPage.xaml</PackagePath>
-      <Modified>2013-02-26T23:08:50.634</Modified>
+      <Modified>2013-03-05T23:44:00.994</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Visual Studio 2012\Projects\VideoMessage\bin\Debug\Common\StandardStyles.xaml">
+    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\bin\Debug\Common\StandardStyles.xaml">
       <PackagePath>Common\StandardStyles.xaml</PackagePath>
       <Modified>2012-06-26T19:19:20.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Visual Studio 2012\Projects\VideoMessage\bin\Debug\resources.pri">
+    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\bin\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <Modified>2013-02-26T20:10:23.671</Modified>
     </AppxPackagedFile>
