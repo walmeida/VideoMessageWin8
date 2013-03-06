@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\VideoMessage.csproj;neutral
+=======
+C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\VideoMessage.csproj;neutral
+>>>>>>> 39f8695ceaa88da74125e261d7e8e0797fc121c0

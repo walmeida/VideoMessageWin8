@@ -15,6 +15,7 @@ using Windows.Media.Capture;
 using Windows.Media.MediaProperties;
 using Windows.UI.Xaml.Media.Imaging;
 using System.Text;
+using Windows.Media;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Net;
@@ -30,14 +31,27 @@ namespace VideoMessage
     {
         private MediaCapture m_mediaCaptureMgr;
         private bool m_bRecording;
+        private bool m_bAssistindo;
         private readonly String VIDEO_FILE_NAME = "video.mp4";
         private Windows.Storage.StorageFile m_recordStorageFile;
         HttpClient httpClient;
+
+        private MediaExtensionManager extensions = new MediaExtensionManager();
         
         public MainPage()
         {
             this.InitializeComponent();
             startDeviceAndPreview();
+
+            adicionaSuporteAoSmoothStreaming();
+
+            mediaElement.MediaOpened += mediaElement_MediaOpened;
+        }
+
+        private void adicionaSuporteAoSmoothStreaming()
+        {
+            extensions.RegisterByteStreamHandler("Microsoft.Media.AdaptiveStreaming.SmoothByteStreamHandler", ".ism", "text/xml");
+            extensions.RegisterByteStreamHandler("Microsoft.Media.AdaptiveStreaming.SmoothByteStreamHandler", ".ism", "application/vnd.ms-sstr+xml");
         }
 
         private async void startDeviceAndPreview()
@@ -222,5 +236,36 @@ namespace VideoMessage
         protected override void SaveState(Dictionary<String, Object> pageState)
         {
         }
+
+        private void btnPlayMensagem_Click(object sender, RoutedEventArgs e)
+        {
+            if (!m_bAssistindo)
+            {
+                mediaElement.Source = new Uri("http://ecn.channel9.msdn.com/o9/content/smf/smoothcontent/elephantsdream/Elephants_Dream_1024-h264-st-aac.ism/manifest");
+                
+                btnPlayMensagem.Content = "Parar Mensagem";
+                m_bAssistindo = true;
+            }
+            else
+            {
+                m_bAssistindo = false;
+                mediaElement.Stop();
+                btnPlayMensagem.Content = "Ver Mensagem";
+            }
+        }
+
+        private void mediaElement_MediaOpened(object sender, RoutedEventArgs e)
+        {
+            txtStatus.Text = "MediaElement opened";
+            mediaElement.Play();
+        }
+
+        
+
+        
+
+        
+
+        
     }
 }
