@@ -20,6 +20,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Net;
 using Newtonsoft.Json.Linq;
+using System.Net.Http.Headers;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -35,7 +36,6 @@ namespace VideoMessage
         private bool m_bAssistindo;
         private readonly String VIDEO_FILE_NAME = "video.mp4";
         private Windows.Storage.StorageFile m_recordStorageFile;
-        HttpClient httpClient;
         String accessToken;
 
         private MediaExtensionManager extensions = new MediaExtensionManager();
@@ -197,7 +197,7 @@ namespace VideoMessage
         {
             try
             {
-                httpClient = new HttpClient();
+                HttpClient httpClient = new HttpClient();
                 FormUrlEncodedContent form = new FormUrlEncodedContent(new System.Collections.Generic.Dictionary<string, string> { { "grant_type", "client_credentials" }, { "client_id", "videomessagems" }, { "client_secret", "+yaQ3dn0uZ/8wHHFYtAkVp9XiabClBHd5IGJwf2g2io=" }, { "scope", "urn:WindowsAzureMediaServices" } });
                 HttpResponseMessage response = await httpClient.PostAsync("https://wamsprodglobal001acs.accesscontrol.windows.net/v2/OAuth2-13", form);
                 if (response.StatusCode == HttpStatusCode.OK)
@@ -207,6 +207,7 @@ namespace VideoMessage
 
                     accessToken = (String) jsonObj["access_token"];
                     btnSend.IsEnabled = false;
+                    criarAssetCall();
                 }
             }
             catch (HttpRequestException hre)
@@ -216,6 +217,28 @@ namespace VideoMessage
             catch (TaskCanceledException)
             {
                 
+            }
+
+        }
+
+        private async void criarAssetCall()
+        {
+            HttpClient httpClient = new HttpClient();
+            //httpClient.BaseAddress = new Uri("https://media.windows.net/API/Assets");
+            httpClient.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json;odata=verbose"));
+            HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, "https://wamsbluclus001rest-hs.cloudapp.net/API/Assets");
+            req.Content = new StringContent("{'Name': 'AssetDeTest'}");
+            req.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json;odata=verbose");
+            req.Content.Headers.Add("DataServiceVersion", "3.0");
+            req.Content.Headers.Add("MaxDataServiceVersion", "3.0");
+            req.Content.Headers.Add("x-ms-version", "2.0");
+
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            HttpResponseMessage response = await httpClient.SendAsync(req);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                //Sucesso
             }
 
         }
