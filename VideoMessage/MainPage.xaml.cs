@@ -21,6 +21,7 @@ using System.Threading.Tasks;
 using System.Net;
 using Newtonsoft.Json.Linq;
 using System.Net.Http.Headers;
+using Windows.Storage.Streams;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -346,9 +347,19 @@ namespace VideoMessage
             HttpClient httpClient = new HttpClient(handler);
             
             //httpClient.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json;odata=verbose"));
-            
+            byte[] fileBytes = null;
+            using (IRandomAccessStreamWithContentType stream = await m_recordStorageFile.OpenReadAsync())
+            {
+                fileBytes = new byte[stream.Size];
+                using (DataReader reader = new DataReader(stream))
+                {
+                    await reader.LoadAsync((uint)stream.Size);
+                    reader.ReadBytes(fileBytes);
+                }
+            }
+
             HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Put, pathUpload);
-            req.Content =  "";
+            req.Content =  new ByteArrayContent(fileBytes);
             req.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/octet-stream");
             req.Content.Headers.Add("x-ms-version", "2011-08-18");
             req.Content.Headers.Add("x-ms-date", "2011-01-17");
@@ -356,10 +367,9 @@ namespace VideoMessage
             
             HttpResponseMessage response = await httpClient.SendAsync(req);
 
-            if (response.StatusCode != HttpStatusCode.MovedPermanently)
+            if (response.StatusCode == HttpStatusCode.Created)
             {
-                //Erro
-                return;
+                //Sucesso
             }
         }
         
