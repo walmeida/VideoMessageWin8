@@ -114,7 +114,11 @@ namespace VideoMessage.VideoMessage_XamlTypeInfo
 
         private object Activate_0_LayoutAwarePage() { return new global::VideoMessage.Common.LayoutAwarePage(); }
 
-        private object Activate_1_MainPage() { return new global::VideoMessage.MainPage(); }
+        private object Activate_1_ContatosList() { return new global::VideoMessage.ContatosList(); }
+
+        private object Activate_2_MainPage() { return new global::VideoMessage.MainPage(); }
+
+        private object Activate_3_MensagensContato() { return new global::VideoMessage.MensagensContato(); }
 
 
         private global::Windows.UI.Xaml.Markup.IXamlType CreateXamlType(string typeName)
@@ -138,9 +142,21 @@ namespace VideoMessage.VideoMessage_XamlTypeInfo
                 xamlType = userType;
                 break;
 
+            case "VideoMessage.ContatosList":
+                userType = new global::VideoMessage.VideoMessage_XamlTypeInfo.XamlUserType(this, typeName, typeof(global::VideoMessage.ContatosList), GetXamlTypeByName("VideoMessage.Common.LayoutAwarePage"));
+                userType.Activator = Activate_1_ContatosList;
+                xamlType = userType;
+                break;
+
             case "VideoMessage.MainPage":
                 userType = new global::VideoMessage.VideoMessage_XamlTypeInfo.XamlUserType(this, typeName, typeof(global::VideoMessage.MainPage), GetXamlTypeByName("VideoMessage.Common.LayoutAwarePage"));
-                userType.Activator = Activate_1_MainPage;
+                userType.Activator = Activate_2_MainPage;
+                xamlType = userType;
+                break;
+
+            case "VideoMessage.MensagensContato":
+                userType = new global::VideoMessage.VideoMessage_XamlTypeInfo.XamlUserType(this, typeName, typeof(global::VideoMessage.MensagensContato), GetXamlTypeByName("VideoMessage.Common.LayoutAwarePage"));
+                userType.Activator = Activate_3_MensagensContato;
                 xamlType = userType;
                 break;
 

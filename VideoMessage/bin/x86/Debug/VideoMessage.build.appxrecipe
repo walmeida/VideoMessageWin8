@@ -22,6 +22,12 @@
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows\v8.0\ExtensionSDKs\Microsoft.Media.AdaptiveStreamingClient\1.0\References\CommonConfiguration\neutral\Microsoft.Media.AdaptiveStreaming.winmd">
       <PackagePath>Microsoft.Media.AdaptiveStreaming.winmd</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\packages\Newtonsoft.Json.4.5.11\lib\winrt45\Newtonsoft.Json.dll">
+      <PackagePath>Newtonsoft.Json.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\packages\Newtonsoft.Json.4.5.11\lib\winrt45\Newtonsoft.Json.xml">
+      <PackagePath>Newtonsoft.Json.xml</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows\v8.0\ExtensionSDKs\Microsoft.Media.AdaptiveStreamingClient\1.0\Redist\CommonConfiguration\x86\Microsoft.Media.AdaptiveStreaming.dll">
       <PackagePath>Microsoft.Media.AdaptiveStreaming.dll</PackagePath>
     </AppxPackagedFile>
@@ -44,11 +50,35 @@
     <AppxPackagedFile Include="C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\Common\ReadMe.txt">
       <PackagePath>Common\ReadMe.txt</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\img\eduardoPic.jpg">
+      <PackagePath>img\eduardoPic.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\img\ericoPic.jpg">
+      <PackagePath>img\ericoPic.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\img\gabrielPic.jpg">
+      <PackagePath>img\gabrielPic.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\img\garbulhoPic.jpg">
+      <PackagePath>img\garbulhoPic.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\img\gordoPic.jpg">
+      <PackagePath>img\gordoPic.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\img\wallacePic.jpg">
+      <PackagePath>img\wallacePic.jpg</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\bin\x86\Debug\App.xaml">
       <PackagePath>App.xaml</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\bin\x86\Debug\ContatosList.xaml">
+      <PackagePath>ContatosList.xaml</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\bin\x86\Debug\MainPage.xaml">
       <PackagePath>MainPage.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\bin\x86\Debug\MensagensContato.xaml">
+      <PackagePath>MensagensContato.xaml</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\bin\x86\Debug\Common\StandardStyles.xaml">
       <PackagePath>Common\StandardStyles.xaml</PackagePath>
