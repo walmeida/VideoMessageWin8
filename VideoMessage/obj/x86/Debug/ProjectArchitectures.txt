@@ -1,1 +1,1 @@
-C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\VideoMessage.csproj;x86
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\VideoMessage.csproj;x86
