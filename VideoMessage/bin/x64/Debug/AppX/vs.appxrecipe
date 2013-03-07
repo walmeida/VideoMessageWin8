@@ -22,11 +22,11 @@
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\bin\x64\Debug\VideoMessage.exe">
       <PackagePath>VideoMessage.exe</PackagePath>
-      <Modified>2013-03-06T10:09:56.214</Modified>
+      <Modified>2013-03-07T15:41:13.885</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\bin\x64\Debug\VideoMessage.pdb">
       <PackagePath>VideoMessage.pdb</PackagePath>
-      <Modified>2013-03-06T10:09:56.192</Modified>
+      <Modified>2013-03-07T15:41:13.848</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows\v8.0\ExtensionSDKs\Microsoft.Media.AdaptiveStreamingClient\1.0\References\CommonConfiguration\neutral\Microsoft.Media.AdaptiveStreaming.winmd">
       <PackagePath>Microsoft.Media.AdaptiveStreaming.winmd</PackagePath>

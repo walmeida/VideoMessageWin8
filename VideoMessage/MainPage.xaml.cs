@@ -223,25 +223,84 @@ namespace VideoMessage
 
         private async void criarAssetCall()
         {
-            HttpClient httpClient = new HttpClient();
-            //httpClient.BaseAddress = new Uri("https://media.windows.net/API/Assets");
+            
+            HttpClientHandler handler = new HttpClientHandler();
+            handler.AllowAutoRedirect = false;
+            HttpClient httpClient = new HttpClient(handler);
+            //httpClient.BaseAddress = new Uri("https://wamsbluclus001rest-hs.cloudapp.net/API/Assets");
+            
             httpClient.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json;odata=verbose"));
-            HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, "https://wamsbluclus001rest-hs.cloudapp.net/API/Assets");
-            req.Content = new StringContent("{'Name': 'AssetDeTest'}");
+            HttpRequestMessage req = criaRequest("https://media.windows.net/API/Assets","{'Name': 'AssetDeTest'}");
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            
+            HttpResponseMessage response = await httpClient.SendAsync(req);
+
+            if (response.StatusCode != HttpStatusCode.MovedPermanently)
+            {
+                //Erro
+                return;
+            }
+            
+            String newLocation = response.Headers.Location.ToString() + "Assets";
+            req = criaRequest(newLocation, "{'Name': 'AssetDeTest'}");
+            response = await httpClient.SendAsync(req);
+
+            if (response.StatusCode != HttpStatusCode.Created)
+            {
+                //Sucesso
+                criaAccessPolicy();
+            }
+
+        }
+
+        private async void criaAccessPolicy()
+        {
+            HttpClientHandler handler = new HttpClientHandler();
+            handler.AllowAutoRedirect = false;
+            HttpClient httpClient = new HttpClient(handler);
+            //httpClient.BaseAddress = new Uri("https://wamsbluclus001rest-hs.cloudapp.net/API/AccessPolicies");
+
+            httpClient.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json;odata=verbose"));
+            HttpRequestMessage req = criaRequest("https://media.windows.net/API/AccessPolicies", "{'Name': 'NewUploadPolicy', 'DurationInMinutes' : '300', 'Permissions' : 2 }");
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+            HttpResponseMessage response = await httpClient.SendAsync(req);
+
+            if (response.StatusCode != HttpStatusCode.MovedPermanently)
+            {
+                //Erro
+                return;
+            }
+
+            String newLocation = response.Headers.Location.ToString() + "AccessPolicies";
+            req = criaRequest(newLocation, "{'Name': 'NewUploadPolicy', 'DurationInMinutes' : '300', 'Permissions' : 2 }");
+            response = await httpClient.SendAsync(req);
+
+            if (response.StatusCode != HttpStatusCode.Created)
+            {
+                //Sucesso
+                getUrlUpload();
+            }
+        }
+
+        private async void getUrlUpload()
+        {
+
+        }
+        
+        private HttpRequestMessage criaRequest(String url, String strContent)
+        {
+            HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, url);
+            req.Content = new StringContent(strContent);
             req.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json;odata=verbose");
             req.Content.Headers.Add("DataServiceVersion", "3.0");
             req.Content.Headers.Add("MaxDataServiceVersion", "3.0");
             req.Content.Headers.Add("x-ms-version", "2.0");
-
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-            HttpResponseMessage response = await httpClient.SendAsync(req);
-
-            if (response.StatusCode == HttpStatusCode.OK)
-            {
-                //Sucesso
-            }
-
+            return req;
         }
+
+
+
 
         /// <summary>
         /// Populates the page with content passed during navigation.  Any saved state is also
