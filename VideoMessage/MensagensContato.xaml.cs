@@ -108,6 +108,7 @@ namespace VideoMessage
             }
 
             mediaElement.Source = new Uri("http://ecn.channel9.msdn.com/o9/content/smf/smoothcontent/elephantsdream/Elephants_Dream_1024-h264-st-aac.ism/manifest");
+            //mediaElement.Source = new Uri("http://videomessagems.origin.mediaservices.windows.net/5bb439ab-699b-4829-b083-cf44f5c84980/video.ism/manifest");
             m_bAssistindo = true;
         }
 
