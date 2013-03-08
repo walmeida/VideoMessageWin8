@@ -22,11 +22,11 @@
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\bin\x86\Debug\VideoMessage.exe">
       <PackagePath>VideoMessage.exe</PackagePath>
-      <Modified>2013-03-08T13:12:42.808</Modified>
+      <Modified>2013-03-08T13:21:09.315</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\bin\x86\Debug\VideoMessage.pdb">
       <PackagePath>VideoMessage.pdb</PackagePath>
-      <Modified>2013-03-08T13:12:42.802</Modified>
+      <Modified>2013-03-08T13:21:09.309</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows\v8.0\ExtensionSDKs\Microsoft.Media.AdaptiveStreamingClient\1.0\References\CommonConfiguration\neutral\Microsoft.Media.AdaptiveStreaming.winmd">
       <PackagePath>Microsoft.Media.AdaptiveStreaming.winmd</PackagePath>
@@ -106,7 +106,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\bin\x86\Debug\MainPage.xaml">
       <PackagePath>MainPage.xaml</PackagePath>
-      <Modified>2013-03-06T14:37:06.519</Modified>
+      <Modified>2013-03-08T13:15:16.968</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\bin\x86\Debug\MensagensContato.xaml">
       <PackagePath>MensagensContato.xaml</PackagePath>

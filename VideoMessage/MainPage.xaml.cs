@@ -510,7 +510,7 @@ namespace VideoMessage
             
         }
 
-        private void btnPlayMensagem_Click(object sender, RoutedEventArgs e)
+        private async void btnPlayMensagem_Click(object sender, RoutedEventArgs e)
         {
             var todoItem = new TodoItem { Text = "URI CHANELS UHU 2"};
             InsertTodoItem(todoItem);
