@@ -450,6 +450,8 @@ namespace VideoMessage
                 String strBrutaPath = (String)jsonObj["d"]["Path"];
                 //String[] arrPath = strBrutaPath.Split('?');
                 pathDownload = strBrutaPath + "video.ism/manifest";
+                btnSend.Content = "Video Enviado";
+                btnPlayMensagem.IsEnabled = true;
                 //downloadVideo();
 
 
@@ -493,12 +495,14 @@ namespace VideoMessage
         {
         }
 
-        private void btnPlayMensagem_Click(object sender, RoutedEventArgs e)
+        private async void btnPlayMensagem_Click(object sender, RoutedEventArgs e)
         {
             if (!m_bAssistindo)
             {
-                mediaElement.Source = new Uri("http://ecn.channel9.msdn.com/o9/content/smf/smoothcontent/elephantsdream/Elephants_Dream_1024-h264-st-aac.ism/manifest");
-                
+                //mediaElement.Source = new Uri("http://ecn.channel9.msdn.com/o9/content/smf/smoothcontent/elephantsdream/Elephants_Dream_1024-h264-st-aac.ism/manifest");
+                var stream = await m_recordStorageFile.OpenAsync(Windows.Storage.FileAccessMode.Read);
+                mediaElement.SetSource(stream, m_recordStorageFile.ContentType);
+
                 btnPlayMensagem.Content = "Parar Mensagem";
                 m_bAssistindo = true;
             }

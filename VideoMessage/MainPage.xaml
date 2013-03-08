@@ -56,8 +56,8 @@
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Grid.Row="1">
                 <Button x:Name="btnStartStopRecord" Click="btnStartStopRecord_Click" IsEnabled="false"  Margin="0,0,10,0">Gravar</Button>
                 <Button x:Name="btnSelectFriend" Click="PickAContactButton_Click" IsEnabled="false"  Margin="0,0,10,0">Selecionar Amigo</Button>
-                <Button x:Name="btnPlayMensagem" Click="btnPlayMensagem_Click" IsEnabled="true"  Margin="0,0,10,0">Ver Mensagem</Button>
-                <TextBox x:Name="txtStatus" FontSize="10" Width="700" VerticalAlignment="Center"/>
+                <Button x:Name="btnPlayMensagem" Click="btnPlayMensagem_Click" IsEnabled="false"  Margin="0,0,10,0">Ver Mensagem</Button>
+                <TextBox x:Name="txtStatus" FontSize="10" Width="700" Visibility="Collapsed" VerticalAlignment="Center"/>
             </StackPanel>
         </StackPanel>
 
