@@ -256,7 +256,7 @@ namespace VideoMessage
                 JObject jsonObj = JObject.Parse(responseBodyAsText);
 
                 //POG Nervosa para obter o id
-                assetId = ((String) jsonObj["d"]["__metadata"]["id"]).Replace(newLocation + "('","").Replace("')","");
+                assetId = Uri.UnescapeDataString(((String) jsonObj["d"]["__metadata"]["id"]).Replace(newLocation + "('","").Replace("')",""));
 
                 criaAccessPolicy();
             }
@@ -293,8 +293,8 @@ namespace VideoMessage
                 JObject jsonObj = JObject.Parse(responseBodyAsText);
 
                 //POG Nervosa para obter o id
-                accessPolicyId = ((String)jsonObj["d"]["__metadata"]["id"]).Replace(newLocation + "('", "").Replace("')", "");
-
+                accessPolicyId = Uri.UnescapeDataString(((String)jsonObj["d"]["__metadata"]["id"]).Replace(newLocation + "('", "").Replace("')", ""));
+                
 
                 getUrlUpload();
             }
@@ -308,7 +308,7 @@ namespace VideoMessage
             //httpClient.BaseAddress = new Uri("https://wamsbluclus001rest-hs.cloudapp.net/API/Locators");
 
             httpClient.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json;odata=verbose"));
-            String requestStr = "{'AccessPolicyId': '" + accessPolicyId + "', 'AssetId' : '" + assetId + "', 'StartTime' : '" + String.Format("{0:M/d/yyyy HH:mm:ss tt}",DateTime.Now.AddMinutes(-5)) + "', 'Type' : 1 }";
+            String requestStr = "{'AccessPolicyId': '" + accessPolicyId + "', 'AssetId' : '" + assetId + "', 'StartTime' : '" + String.Format("{0:M/d/yyyy h:mm:ss tt}",DateTime.Now.AddMinutes(-5)) + "', 'Type' : 1 }";
             HttpRequestMessage req = criaRequest("https://media.windows.net/API/Locators", requestStr);
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
@@ -331,7 +331,7 @@ namespace VideoMessage
                 JObject jsonObj = JObject.Parse(responseBodyAsText);
 
                 //POG Nervosa para obter o id
-                String strBrutaPath = (String) jsonObj["d"]["__metadata"]["Path"];
+                String strBrutaPath = (String) jsonObj["d"]["Path"];
                 String[] arrPath = strBrutaPath.Split('?');
                 pathUpload = arrPath[0] + "video.mp4?" + arrPath[1];
                 uploadVideo();
@@ -362,10 +362,12 @@ namespace VideoMessage
             req.Content =  new ByteArrayContent(fileBytes);
             req.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/octet-stream");
             req.Content.Headers.Add("x-ms-version", "2011-08-18");
-            req.Content.Headers.Add("x-ms-date", "2011-01-17");
+            req.Content.Headers.Add("x-ms-date", String.Format("{0:yyyy-MM-dd}",DateTime.UtcNow));
             req.Content.Headers.Add("x-ms-blob", "BlockBlob");
-            
+                        
             HttpResponseMessage response = await httpClient.SendAsync(req);
+
+            String responseBodyAsText = await response.Content.ReadAsStringAsync();
 
             if (response.StatusCode == HttpStatusCode.Created)
             {

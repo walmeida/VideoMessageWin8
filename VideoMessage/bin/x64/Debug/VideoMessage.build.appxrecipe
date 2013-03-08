@@ -50,11 +50,35 @@
     <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\Common\ReadMe.txt">
       <PackagePath>Common\ReadMe.txt</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\img\eduardoPic.jpg">
+      <PackagePath>img\eduardoPic.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\img\ericoPic.jpg">
+      <PackagePath>img\ericoPic.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\img\gabrielPic.jpg">
+      <PackagePath>img\gabrielPic.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\img\garbulhoPic.jpg">
+      <PackagePath>img\garbulhoPic.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\img\gordoPic.jpg">
+      <PackagePath>img\gordoPic.jpg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\img\wallacePic.jpg">
+      <PackagePath>img\wallacePic.jpg</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\bin\x64\Debug\App.xaml">
       <PackagePath>App.xaml</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\bin\x64\Debug\ContatosList.xaml">
+      <PackagePath>ContatosList.xaml</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\bin\x64\Debug\MainPage.xaml">
       <PackagePath>MainPage.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\bin\x64\Debug\MensagensContato.xaml">
+      <PackagePath>MensagensContato.xaml</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\bin\x64\Debug\Common\StandardStyles.xaml">
       <PackagePath>Common\StandardStyles.xaml</PackagePath>
