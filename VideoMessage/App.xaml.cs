@@ -36,7 +36,7 @@ namespace VideoMessage
         );
 
         public static String sender = "111";
-        public static String dest = "222";
+        public static String dest = "111";
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -128,7 +128,7 @@ namespace VideoMessage
 
         void CurrentChannel_PushNotificationReceived(PushNotificationChannel sender, PushNotificationReceivedEventArgs args)
         {
-            var content = args.ToastNotification.Content;
+            
         }
     }
 }
