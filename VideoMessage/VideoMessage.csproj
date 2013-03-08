@@ -133,9 +133,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Logo.png" />
+    <Content Include="Assets\message-620-300.jpg" />
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\video-message-150-150.jpg" />
+    <Content Include="Assets\video-message-24-24.jpg" />
+    <Content Include="Assets\video-message-30-30.jpg" />
+    <Content Include="Assets\video-message-icon.jpg" />
     <Content Include="Common\ReadMe.txt" />
     <Content Include="img\eduardoPic.jpg" />
     <Content Include="img\ericoPic.jpg" />

@@ -515,6 +515,8 @@ namespace VideoMessage
 
         private async void btnPlayMensagem_Click(object sender, RoutedEventArgs e)
         {
+            //this.Frame.Navigate(typeof(MensagensContato), m_recordStorageFile);
+
             if (!m_bAssistindo)
             {
                 //mediaElement.Source = new Uri("http://ecn.channel9.msdn.com/o9/content/smf/smoothcontent/elephantsdream/Elephants_Dream_1024-h264-st-aac.ism/manifest");

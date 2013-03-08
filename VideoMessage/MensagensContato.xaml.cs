@@ -61,35 +61,69 @@ namespace VideoMessage
         /// session.  This will be null the first time a page is visited.</param>
         protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
-            // TODO: Assign a bindable group to this.DefaultViewModel["Group"]
-            // TODO: Assign a collection of bindable items to this.DefaultViewModel["Items"]
-            var group = SampleDataSource.GetGroup((String)navigationParameter);
-            this.DefaultViewModel["Group"] = group;
-            this.DefaultViewModel["Items"] = group.Items;
 
-            if (pageState == null)
+            if (navigationParameter is String)
             {
-                this.itemListView.SelectedItem = null;
-                // When this is a new page, select the first item automatically unless logical page
-                // navigation is being used (see the logical page navigation #region below.)
-                if (!this.UsingLogicalPageNavigation() && this.itemsViewSource.View != null)
+
+                // TODO: Assign a bindable group to this.DefaultViewModel["Group"]
+                // TODO: Assign a collection of bindable items to this.DefaultViewModel["Items"]
+                var group = SampleDataSource.GetGroup((String)navigationParameter);
+                this.DefaultViewModel["Group"] = group;
+                this.DefaultViewModel["Items"] = group.Items;
+
+                if (pageState == null)
                 {
-                    this.itemsViewSource.View.MoveCurrentToFirst();
-                    playVideo();
+                    this.itemListView.SelectedItem = null;
+                    // When this is a new page, select the first item automatically unless logical page
+                    // navigation is being used (see the logical page navigation #region below.)
+                    if (!this.UsingLogicalPageNavigation() && this.itemsViewSource.View != null)
+                    {
+                        this.itemsViewSource.View.MoveCurrentToFirst();
+                        playVideo();
+                    }
+                }
+                else
+                {
+                    // Restore the previously saved state associated with this page
+                    if (pageState.ContainsKey("SelectedItem") && this.itemsViewSource.View != null)
+                    {
+                        // TODO: Invoke this.itemsViewSource.View.MoveCurrentTo() with the selected
+                        //       item as specified by the value of pageState["SelectedItem"]
+                        var selectedItem = SampleDataSource.GetItem((String)pageState["SelectedItem"]);
+                        this.itemsViewSource.View.MoveCurrentTo(selectedItem);
+
+                    }
                 }
             }
             else
             {
-                // Restore the previously saved state associated with this page
-                if (pageState.ContainsKey("SelectedItem") && this.itemsViewSource.View != null)
-                {
-                    // TODO: Invoke this.itemsViewSource.View.MoveCurrentTo() with the selected
-                    //       item as specified by the value of pageState["SelectedItem"]
-                    var selectedItem = SampleDataSource.GetItem((String)pageState["SelectedItem"]);
-                    this.itemsViewSource.View.MoveCurrentTo(selectedItem);
-
-                }
+                // TODO: Assign a bindable group to this.DefaultViewModel["Group"]
+                // TODO: Assign a collection of bindable items to this.DefaultViewModel["Items"]
+                var group = SampleDataSource.GetGroup("Group-1");
+                this.DefaultViewModel["Group"] = group;
+                this.DefaultViewModel["Items"] = group.Items;
+                this.itemsViewSource.View.MoveCurrentToFirst();
+                playVideoGravado(navigationParameter);
             }
+
+        }
+
+        private async void playVideoGravado(object navigationParameter)
+        {
+            if (m_bAssistindo)
+            {
+                m_bAssistindo = false;
+                mediaElement.Stop();
+
+            }
+
+            Windows.Storage.StorageFile m_recordStorageFile = (Windows.Storage.StorageFile) navigationParameter;
+
+            var stream = await m_recordStorageFile.OpenAsync(Windows.Storage.FileAccessMode.Read);
+            mediaElement.SetSource(stream, m_recordStorageFile.ContentType);
+            mediaElement.Play();
+
+            m_bAssistindo = true;
         }
 
         private void ItemListView_MensagemClick(object sender, ItemClickEventArgs e)
@@ -108,8 +142,6 @@ namespace VideoMessage
             }
 
             mediaElement.Source = new Uri("http://ecn.channel9.msdn.com/o9/content/smf/smoothcontent/elephantsdream/Elephants_Dream_1024-h264-st-aac.ism/manifest");
-            //mediaElement.Source = new Uri("http://videomessagems.origin.mediaservices.windows.net/5bb439ab-699b-4829-b083-cf44f5c84980/video.ism/manifest");
-            
             m_bAssistindo = true;
         }
 

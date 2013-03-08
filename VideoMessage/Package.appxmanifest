@@ -15,9 +15,9 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="VideoMessage.App">
-      <VisualElements DisplayName="MyEyes Video Message" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="VideoMessage" ForegroundText="light" BackgroundColor="#464646" ToastCapable="true">
+      <VisualElements DisplayName="MyEyes Video Message" Logo="Assets\video-message-150-150.jpg" SmallLogo="Assets\video-message-30-30.jpg" Description="VideoMessage" ForegroundText="light" BackgroundColor="#464646" ToastCapable="true">
         <DefaultTile ShowName="allLogos" />
-        <SplashScreen Image="Assets\SplashScreen.png" />
+        <SplashScreen Image="Assets\message-620-300.jpg" />
       </VisualElements>
     </Application>
   </Applications>
