@@ -458,6 +458,9 @@ namespace VideoMessage
                 btnPlayMensagem.IsEnabled = true;
                 //downloadVideo();
 
+                var nome = await Windows.System.UserProfile.UserInformation.GetDisplayNameAsync();
+                var todoItem = new TodoItem { Text = "Nova mensagem de " + nome, Destinatario = App.dest};
+                InsertTodoItem(todoItem);
 
             }
         }
@@ -512,9 +515,6 @@ namespace VideoMessage
 
         private async void btnPlayMensagem_Click(object sender, RoutedEventArgs e)
         {
-            var todoItem = new TodoItem { Text = "URI CHANELS UHU 2"};
-            InsertTodoItem(todoItem);
-
             if (!m_bAssistindo)
             {
                 //mediaElement.Source = new Uri("http://ecn.channel9.msdn.com/o9/content/smf/smoothcontent/elephantsdream/Elephants_Dream_1024-h264-st-aac.ism/manifest");

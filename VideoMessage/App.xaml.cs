@@ -35,6 +35,9 @@ namespace VideoMessage
             "dxhgNYlLctcaVpAvOixiRGjUMAnePg46"
         );
 
+        public static String sender = "111";
+        public static String dest = "222";
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -119,7 +122,7 @@ namespace VideoMessage
             CurrentChannel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
             CurrentChannel.PushNotificationReceived += CurrentChannel_PushNotificationReceived;
             IMobileServiceTable<Channel> channelTable = App.MobileService.GetTable<Channel>();
-            var channel = new Channel { Uri = CurrentChannel.Uri };
+            var channel = new Channel { Uri = CurrentChannel.Uri, Ident = sender};
             await channelTable.InsertAsync(channel);
         }
 
