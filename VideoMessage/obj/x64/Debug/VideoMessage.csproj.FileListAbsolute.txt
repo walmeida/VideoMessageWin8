@@ -59,3 +59,9 @@ C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\
 C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\x64\Debug\pri.resfiles
 C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\x64\Debug\LanguageQualifiers.txt
 C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\x64\Debug\ProjectArchitectures.txt
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\x64\Debug\ContatosList.g.i.cs
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\x64\Debug\ContatosList.g.cs
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\x64\Debug\MensagensContato.g.i.cs
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\x64\Debug\MensagensContato.g.cs
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\x64\Debug\ContatosList.xaml
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\x64\Debug\MensagensContato.xaml

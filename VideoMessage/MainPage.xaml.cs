@@ -21,6 +21,7 @@ using System.Threading.Tasks;
 using System.Net;
 using Newtonsoft.Json.Linq;
 using System.Net.Http.Headers;
+using Windows.Storage.Streams;
 using System.Runtime.Serialization;
 using Microsoft.WindowsAzure.MobileServices;
 using modelo;
@@ -44,6 +45,8 @@ namespace VideoMessage
         String accessPolicyId;
         String assetId;
         String pathUpload;
+        String downloadAccessPolicyId;
+        String pathDownload;
 
         private MediaExtensionManager extensions = new MediaExtensionManager();
         
@@ -204,6 +207,7 @@ namespace VideoMessage
         {
             try
             {
+                btnSend.Content = "Enviando...";
                 btnSend.IsEnabled = false;
                 HttpClient httpClient = new HttpClient();
                 FormUrlEncodedContent form = new FormUrlEncodedContent(new System.Collections.Generic.Dictionary<string, string> { { "grant_type", "client_credentials" }, { "client_id", "videomessagems" }, { "client_secret", "+yaQ3dn0uZ/8wHHFYtAkVp9XiabClBHd5IGJwf2g2io=" }, { "scope", "urn:WindowsAzureMediaServices" } });
@@ -237,7 +241,7 @@ namespace VideoMessage
             //httpClient.BaseAddress = new Uri("https://wamsbluclus001rest-hs.cloudapp.net/API/Assets");
             
             httpClient.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json;odata=verbose"));
-            HttpRequestMessage req = criaRequest("https://media.windows.net/API/Assets","{'Name': 'AssetDeTest'}");
+            HttpRequestMessage req = criaRequest("https://media.windows.net/API/Assets","{'Name': 'AssetVideoMessage'}");
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
             
             HttpResponseMessage response = await httpClient.SendAsync(req);
@@ -259,7 +263,7 @@ namespace VideoMessage
                 JObject jsonObj = JObject.Parse(responseBodyAsText);
 
                 //POG Nervosa para obter o id
-                assetId = ((String) jsonObj["d"]["__metadata"]["id"]).Replace(newLocation + "('","").Replace("')","");
+                assetId = Uri.UnescapeDataString(((String) jsonObj["d"]["__metadata"]["id"]).Replace(newLocation + "('","").Replace("')",""));
 
                 criaAccessPolicy();
             }
@@ -296,8 +300,8 @@ namespace VideoMessage
                 JObject jsonObj = JObject.Parse(responseBodyAsText);
 
                 //POG Nervosa para obter o id
-                accessPolicyId = ((String)jsonObj["d"]["__metadata"]["id"]).Replace(newLocation + "('", "").Replace("')", "");
-
+                accessPolicyId = Uri.UnescapeDataString(((String)jsonObj["d"]["__metadata"]["id"]).Replace(newLocation + "('", "").Replace("')", ""));
+                
 
                 getUrlUpload();
             }
@@ -311,7 +315,7 @@ namespace VideoMessage
             //httpClient.BaseAddress = new Uri("https://wamsbluclus001rest-hs.cloudapp.net/API/Locators");
 
             httpClient.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json;odata=verbose"));
-            String requestStr = "{'AccessPolicyId': '" + accessPolicyId + "', 'AssetId' : '" + assetId + "', 'StartTime' : '" + String.Format("{0:M/d/yyyy HH:mm:ss tt}",DateTime.Now.AddMinutes(-5)) + "', 'Type' : 1 }";
+            String requestStr = "{'AccessPolicyId': '" + accessPolicyId + "', 'AssetId' : '" + assetId + "', 'StartTime' : '" + String.Format("{0:M/d/yyyy h:mm:ss tt}",DateTime.Now.AddMinutes(-5)) + "', 'Type' : 1 }";
             HttpRequestMessage req = criaRequest("https://media.windows.net/API/Locators", requestStr);
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
@@ -334,9 +338,9 @@ namespace VideoMessage
                 JObject jsonObj = JObject.Parse(responseBodyAsText);
 
                 //POG Nervosa para obter o id
-                String strBrutaPath = (String) jsonObj["d"]["__metadata"]["Path"];
+                String strBrutaPath = (String) jsonObj["d"]["Path"];
                 String[] arrPath = strBrutaPath.Split('?');
-                pathUpload = arrPath[0] + "video.mp4?" + arrPath[1];
+                pathUpload = arrPath[0] + "/video.mp4?" + arrPath[1];
                 uploadVideo();
 
 
@@ -350,14 +354,46 @@ namespace VideoMessage
             HttpClient httpClient = new HttpClient(handler);
             
             //httpClient.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json;odata=verbose"));
-            
+            byte[] fileBytes = null;
+            using (IRandomAccessStreamWithContentType stream = await m_recordStorageFile.OpenReadAsync())
+            {
+                fileBytes = new byte[stream.Size];
+                using (DataReader reader = new DataReader(stream))
+                {
+                    await reader.LoadAsync((uint)stream.Size);
+                    reader.ReadBytes(fileBytes);
+                }
+            }
+
             HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Put, pathUpload);
-            //req.Content =  "";
+            req.Content =  new ByteArrayContent(fileBytes);
             req.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/octet-stream");
             req.Content.Headers.Add("x-ms-version", "2011-08-18");
-            req.Content.Headers.Add("x-ms-date", "2011-01-17");
-            req.Content.Headers.Add("x-ms-blob", "BlockBlob");
-            
+            req.Content.Headers.Add("x-ms-date", String.Format("{0:yyyy-MM-dd}",DateTime.UtcNow));
+            req.Content.Headers.Add("x-ms-blob-type", "BlockBlob");
+                        
+            HttpResponseMessage response = await httpClient.SendAsync(req);
+
+            String responseBodyAsText = await response.Content.ReadAsStringAsync();
+
+            if (response.StatusCode == HttpStatusCode.Created)
+            {
+                //Sucesso
+                criaDownloadAccessPolicy();
+            }
+        }
+
+        private async void criaDownloadAccessPolicy()
+        {
+            HttpClientHandler handler = new HttpClientHandler();
+            handler.AllowAutoRedirect = false;
+            HttpClient httpClient = new HttpClient(handler);
+            //httpClient.BaseAddress = new Uri("https://wamsbluclus001rest-hs.cloudapp.net/API/AccessPolicies");
+
+            httpClient.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json;odata=verbose"));
+            HttpRequestMessage req = criaRequest("https://media.windows.net/API/AccessPolicies", "{'Name': 'DownloadPolicy', 'DurationInMinutes' : '300', 'Permissions' : 1 }");
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
             HttpResponseMessage response = await httpClient.SendAsync(req);
 
             if (response.StatusCode != HttpStatusCode.MovedPermanently)
@@ -365,8 +401,67 @@ namespace VideoMessage
                 //Erro
                 return;
             }
+
+            String newLocation = response.Headers.Location.ToString() + "AccessPolicies";
+            req = criaRequest(newLocation, "{'Name': 'DownloadPolicy', 'DurationInMinutes' : '300', 'Permissions' : 1 }");
+            response = await httpClient.SendAsync(req);
+
+            if (response.StatusCode == HttpStatusCode.Created)
+            {
+                //Sucesso
+                String responseBodyAsText = await response.Content.ReadAsStringAsync();
+                JObject jsonObj = JObject.Parse(responseBodyAsText);
+
+                //POG Nervosa para obter o id
+                downloadAccessPolicyId = Uri.UnescapeDataString(((String)jsonObj["d"]["__metadata"]["id"]).Replace(newLocation + "('", "").Replace("')", ""));
+
+
+                getUrlDownload();
+            }
         }
-        
+
+        private async void getUrlDownload()
+        {
+            HttpClientHandler handler = new HttpClientHandler();
+            handler.AllowAutoRedirect = false;
+            HttpClient httpClient = new HttpClient(handler);
+            //httpClient.BaseAddress = new Uri("https://wamsbluclus001rest-hs.cloudapp.net/API/Locators");
+
+            httpClient.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json;odata=verbose"));
+            String requestStr = "{'AccessPolicyId': '" + downloadAccessPolicyId + "', 'AssetId' : '" + assetId + "', 'StartTime' : '" + String.Format("{0:M/d/yyyy h:mm:ss tt}", DateTime.Now.AddMinutes(-5)) + "', 'Type' : 2 }";
+            HttpRequestMessage req = criaRequest("https://media.windows.net/API/Locators", requestStr);
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+            HttpResponseMessage response = await httpClient.SendAsync(req);
+
+            if (response.StatusCode != HttpStatusCode.MovedPermanently)
+            {
+                //Erro
+                return;
+            }
+
+            String newLocation = response.Headers.Location.ToString() + "Locators";
+            req = criaRequest(newLocation, requestStr);
+            response = await httpClient.SendAsync(req);
+
+            if (response.StatusCode == HttpStatusCode.Created)
+            {
+                //Sucesso
+                String responseBodyAsText = await response.Content.ReadAsStringAsync();
+                JObject jsonObj = JObject.Parse(responseBodyAsText);
+
+                //POG Nervosa para obter o id
+                String strBrutaPath = (String)jsonObj["d"]["Path"];
+                //String[] arrPath = strBrutaPath.Split('?');
+                pathDownload = strBrutaPath + "video.ism/manifest";
+                btnSend.Content = "Video Enviado";
+                btnPlayMensagem.IsEnabled = true;
+                //downloadVideo();
+
+
+            }
+        }
+
         private HttpRequestMessage criaRequest(String url, String strContent)
         {
             HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, url);
@@ -422,8 +517,10 @@ namespace VideoMessage
 
             if (!m_bAssistindo)
             {
-                mediaElement.Source = new Uri("http://ecn.channel9.msdn.com/o9/content/smf/smoothcontent/elephantsdream/Elephants_Dream_1024-h264-st-aac.ism/manifest");
-                
+                //mediaElement.Source = new Uri("http://ecn.channel9.msdn.com/o9/content/smf/smoothcontent/elephantsdream/Elephants_Dream_1024-h264-st-aac.ism/manifest");
+                var stream = await m_recordStorageFile.OpenAsync(Windows.Storage.FileAccessMode.Read);
+                mediaElement.SetSource(stream, m_recordStorageFile.ContentType);
+
                 btnPlayMensagem.Content = "Parar Mensagem";
                 m_bAssistindo = true;
             }
