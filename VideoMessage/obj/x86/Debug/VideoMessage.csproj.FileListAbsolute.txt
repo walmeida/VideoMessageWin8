@@ -35,3 +35,5 @@ C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\obj\x86
 C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\obj\x86\Debug\layout.resfiles.intermediate
 C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\obj\x86\Debug\resources.resfiles.intermediate
 C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\obj\x86\Debug\pri.resfiles.intermediate
+C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\bin\x86\Debug\Microsoft.WindowsAzure.MobileServices.Managed.dll
+C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\obj\x86\Debug\VideoMessage.csprojResolveAssemblyReference.cache

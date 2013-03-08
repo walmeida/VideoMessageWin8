@@ -12,7 +12,8 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>VideoMessage_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>VideoMessage_StoreKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>FD7B699460486AC4E151433793B5BDC887FF2330</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -119,6 +120,7 @@
     <Compile Include="MensagensContato.xaml.cs">
       <DependentUpon>MensagensContato.xaml</DependentUpon>
     </Compile>
+    <Compile Include="modelo\Modelos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +128,7 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <None Include="packages.config" />
+    <None Include="VideoMessage_StoreKey.pfx" />
     <None Include="VideoMessage_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -140,6 +143,7 @@
     <Content Include="img\garbulhoPic.jpg" />
     <Content Include="img\gordoPic.jpg" />
     <Content Include="img\wallacePic.jpg" />
+    <None Include="Package.StoreAssociation.xml" />
     <Page Include="ContatosList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -169,6 +173,9 @@
     </SDKReference>
     <SDKReference Include="Microsoft.VCLibs, Version=11.0">
       <Name>Microsoft Visual C++ Runtime Package</Name>
+    </SDKReference>
+    <SDKReference Include="MobileServicesManagedClient, Version=0.2.0.0">
+      <Name>Windows Azure Mobile Services Managed Client</Name>
     </SDKReference>
   </ItemGroup>
   <ItemGroup>

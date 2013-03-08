@@ -21,11 +21,15 @@ using System.Threading.Tasks;
 using System.Net;
 using Newtonsoft.Json.Linq;
 using System.Net.Http.Headers;
+using System.Runtime.Serialization;
+using Microsoft.WindowsAzure.MobileServices;
+using modelo;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
 namespace VideoMessage
 {
+
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
@@ -348,7 +352,7 @@ namespace VideoMessage
             //httpClient.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json;odata=verbose"));
             
             HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Put, pathUpload);
-            req.Content =  "";
+            //req.Content =  "";
             req.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/octet-stream");
             req.Content.Headers.Add("x-ms-version", "2011-08-18");
             req.Content.Headers.Add("x-ms-date", "2011-01-17");
@@ -400,8 +404,22 @@ namespace VideoMessage
         {
         }
 
+
+        private IMobileServiceTable<TodoItem> todoTable = App.MobileService.GetTable<TodoItem>();
+
+        private async void InsertTodoItem(TodoItem todoItem)
+        {
+            // This code inserts a new TodoItem into the database. When the operation completes
+            // and Mobile Services has assigned an Id, the item is added to the CollectionView
+            await todoTable.InsertAsync(todoItem);
+            
+        }
+
         private void btnPlayMensagem_Click(object sender, RoutedEventArgs e)
         {
+            var todoItem = new TodoItem { Text = "URI CHANELS UHU 2"};
+            InsertTodoItem(todoItem);
+
             if (!m_bAssistindo)
             {
                 mediaElement.Source = new Uri("http://ecn.channel9.msdn.com/o9/content/smf/smoothcontent/elephantsdream/Elephants_Dream_1024-h264-st-aac.ism/manifest");

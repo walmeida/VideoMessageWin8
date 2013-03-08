@@ -13,6 +13,11 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Networking.PushNotifications;
+using Microsoft.WindowsAzure.MobileServices;
+using modelo;
+using VideoMessage.Common;
+using Windows.UI.Notifications;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -23,6 +28,13 @@ namespace VideoMessage
     /// </summary>
     sealed partial class App : Application
     {
+        // This MobileServiceClient has been configured to communicate with your Mobile Service's url
+        // and application key. You're all set to start working with your Mobile Service!
+        public static MobileServiceClient MobileService = new MobileServiceClient(
+            "https://videomessagemobileservice.azure-mobile.net/",
+            "dxhgNYlLctcaVpAvOixiRGjUMAnePg46"
+        );
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -39,10 +51,22 @@ namespace VideoMessage
         /// search results, and so forth.
         /// </summary>
         /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs args)
+        async protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
+            if (args.PreviousExecutionState == ApplicationExecutionState.Terminated)
+            {
+                //     Do an asynchronous restore
+                await SuspensionManager.RestoreAsync();
+            }
+
+            AcquirePushChannel();
+            var goTo = typeof(MensagensContato);
             Frame rootFrame = Window.Current.Content as Frame;
 
+            if (args.Arguments != "")
+            {
+                goTo = typeof(MensagensContato);
+            }
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
             if (rootFrame == null)
@@ -80,11 +104,28 @@ namespace VideoMessage
         /// </summary>
         /// <param name="sender">The source of the suspend request.</param>
         /// <param name="e">Details about the suspend request.</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
+        async private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
+            await SuspensionManager.SaveAsync();
             deferral.Complete();
+        }
+
+        public static PushNotificationChannel CurrentChannel { get; private set; }
+
+        private async void AcquirePushChannel()
+        {
+            CurrentChannel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
+            CurrentChannel.PushNotificationReceived += CurrentChannel_PushNotificationReceived;
+            IMobileServiceTable<Channel> channelTable = App.MobileService.GetTable<Channel>();
+            var channel = new Channel { Uri = CurrentChannel.Uri };
+            await channelTable.InsertAsync(channel);
+        }
+
+        void CurrentChannel_PushNotificationReceived(PushNotificationChannel sender, PushNotificationReceivedEventArgs args)
+        {
+            var content = args.ToastNotification.Content;
         }
     }
 }

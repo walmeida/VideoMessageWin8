@@ -5,32 +5,36 @@
     <WindowsUser>Victor</WindowsUser>
     <SolutionConfiguration>Debug|x86</SolutionConfiguration>
     <PackageArchitecture>x86</PackageArchitecture>
-    <RegisteredManifestChecksum>32D5A41D51A97AE72A4E65035341F3691B87FC84DC3BE490C011DCAACBE331ED</RegisteredManifestChecksum>
-    <RegisteredPackageMoniker>b3eccb21-2c22-42b1-99a1-833831addcc3_1.0.0.0_x86__dmy7m6k6jmm7p</RegisteredPackageMoniker>
-    <RegisteredUserModeAppID>b3eccb21-2c22-42b1-99a1-833831addcc3_dmy7m6k6jmm7p!App</RegisteredUserModeAppID>
-    <RegisteredPackageID>b3eccb21-2c22-42b1-99a1-833831addcc3</RegisteredPackageID>
-    <RegisteredPackagePublisher>CN=Wallace</RegisteredPackagePublisher>
+    <RegisteredManifestChecksum>1ECAB86087618262F50451C31D33E29B04C1128EE7FF8E32FE5BFC4019500307</RegisteredManifestChecksum>
+    <RegisteredPackageMoniker>VTX.MyEyesVideoMessage_1.0.0.0_x86__h5kkv2b1bv6w8</RegisteredPackageMoniker>
+    <RegisteredUserModeAppID>VTX.MyEyesVideoMessage_h5kkv2b1bv6w8!App</RegisteredUserModeAppID>
+    <RegisteredPackageID>VTX.MyEyesVideoMessage</RegisteredPackageID>
+    <RegisteredPackagePublisher>CN=4407209A-50B5-4F6F-8A94-0427A21C8F35</RegisteredPackagePublisher>
     <RegisteredVersion>1.0.0.0</RegisteredVersion>
   </PropertyGroup>
   <ItemGroup>
     <AppXManifest Include="C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\bin\x86\Debug\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2013-03-07T15:49:31.047</Modified>
+      <Modified>2013-03-08T13:13:05.412</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\bin\x86\Debug\VideoMessage.exe">
       <PackagePath>VideoMessage.exe</PackagePath>
-      <Modified>2013-03-07T20:14:28.917</Modified>
+      <Modified>2013-03-08T13:12:42.808</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\bin\x86\Debug\VideoMessage.pdb">
       <PackagePath>VideoMessage.pdb</PackagePath>
-      <Modified>2013-03-07T20:14:28.906</Modified>
+      <Modified>2013-03-08T13:12:42.802</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows\v8.0\ExtensionSDKs\Microsoft.Media.AdaptiveStreamingClient\1.0\References\CommonConfiguration\neutral\Microsoft.Media.AdaptiveStreaming.winmd">
       <PackagePath>Microsoft.Media.AdaptiveStreaming.winmd</PackagePath>
       <Modified>2013-02-22T18:17:08.274</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows\v8.0\ExtensionSDKs\MobileServicesManagedClient\0.2.0.0\References\CommonConfiguration\neutral\Microsoft.WindowsAzure.MobileServices.Managed.dll">
+      <PackagePath>Microsoft.WindowsAzure.MobileServices.Managed.dll</PackagePath>
+      <Modified>2013-01-30T15:38:46.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\packages\Newtonsoft.Json.4.5.11\lib\winrt45\Newtonsoft.Json.dll">
       <PackagePath>Newtonsoft.Json.dll</PackagePath>
@@ -70,7 +74,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\img\eduardoPic.jpg">
       <PackagePath>img\eduardoPic.jpg</PackagePath>
-      <Modified>2013-03-07T14:28:42.380</Modified>
+      <Modified>2013-03-08T13:12:19.437</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\img\ericoPic.jpg">
       <PackagePath>img\ericoPic.jpg</PackagePath>
@@ -114,7 +118,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Victor\development\repository\vtx\VideoMessageWin8\VideoMessage\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2013-03-07T15:49:30.939</Modified>
+      <Modified>2013-03-08T13:13:05.361</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
