@@ -5,32 +5,36 @@
     <WindowsUser>Wallace</WindowsUser>
     <SolutionConfiguration>Debug|x64</SolutionConfiguration>
     <PackageArchitecture>x64</PackageArchitecture>
-    <RegisteredManifestChecksum>2B4CEB9164F1AE567A120AFF6074706F9F6B098F5DA8FB813FF3BB9C60E67A4D</RegisteredManifestChecksum>
-    <RegisteredPackageMoniker>b3eccb21-2c22-42b1-99a1-833831addcc3_1.0.0.0_x64__dmy7m6k6jmm7p</RegisteredPackageMoniker>
-    <RegisteredUserModeAppID>b3eccb21-2c22-42b1-99a1-833831addcc3_dmy7m6k6jmm7p!App</RegisteredUserModeAppID>
-    <RegisteredPackageID>b3eccb21-2c22-42b1-99a1-833831addcc3</RegisteredPackageID>
-    <RegisteredPackagePublisher>CN=Wallace</RegisteredPackagePublisher>
+    <RegisteredManifestChecksum>E1CC23B6CE4225DD8658099E7E73746FD32ABE6C3923D3C245870D21DE05C66B</RegisteredManifestChecksum>
+    <RegisteredPackageMoniker>VTX.MyEyesVideoMessage_1.0.0.0_x64__h5kkv2b1bv6w8</RegisteredPackageMoniker>
+    <RegisteredUserModeAppID>VTX.MyEyesVideoMessage_h5kkv2b1bv6w8!App</RegisteredUserModeAppID>
+    <RegisteredPackageID>VTX.MyEyesVideoMessage</RegisteredPackageID>
+    <RegisteredPackagePublisher>CN=4407209A-50B5-4F6F-8A94-0427A21C8F35</RegisteredPackagePublisher>
     <RegisteredVersion>1.0.0.0</RegisteredVersion>
   </PropertyGroup>
   <ItemGroup>
     <AppXManifest Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\bin\x64\Debug\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2013-03-07T22:34:35.121</Modified>
+      <Modified>2013-03-08T15:04:49.640</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\bin\x64\Debug\VideoMessage.exe">
       <PackagePath>VideoMessage.exe</PackagePath>
-      <Modified>2013-03-08T10:21:26.131</Modified>
+      <Modified>2013-03-12T21:09:20.790</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\bin\x64\Debug\VideoMessage.pdb">
       <PackagePath>VideoMessage.pdb</PackagePath>
-      <Modified>2013-03-08T10:21:26.109</Modified>
+      <Modified>2013-03-12T21:09:20.775</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows\v8.0\ExtensionSDKs\Microsoft.Media.AdaptiveStreamingClient\1.0\References\CommonConfiguration\neutral\Microsoft.Media.AdaptiveStreaming.winmd">
       <PackagePath>Microsoft.Media.AdaptiveStreaming.winmd</PackagePath>
       <Modified>2013-02-22T22:00:23.808</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows\v8.0\ExtensionSDKs\MobileServicesManagedClient\0.2.0.0\References\CommonConfiguration\neutral\Microsoft.WindowsAzure.MobileServices.Managed.dll">
+      <PackagePath>Microsoft.WindowsAzure.MobileServices.Managed.dll</PackagePath>
+      <Modified>2013-01-30T15:38:46.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\packages\Newtonsoft.Json.4.5.11\lib\winrt45\Newtonsoft.Json.dll">
       <PackagePath>Newtonsoft.Json.dll</PackagePath>
@@ -46,17 +50,14 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\Assets\Logo.png">
       <PackagePath>Assets\Logo.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2012-03-15T23:42:52.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\Assets\SmallLogo.png">
       <PackagePath>Assets\SmallLogo.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2012-03-15T23:42:52.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\Assets\SplashScreen.png">
       <PackagePath>Assets\SplashScreen.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2012-03-15T23:42:52.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\Assets\StoreLogo.png">
@@ -64,13 +65,32 @@
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2012-03-15T23:42:52.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\Common\ReadMe.txt">
-      <PackagePath>Common\ReadMe.txt</PackagePath>
-      <Modified>2013-02-26T18:28:33.415</Modified>
+    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\Assets\message-620-300.jpg">
+      <PackagePath>Assets\message-620-300.jpg</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-03-08T14:44:27.866</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\Assets\video-message-150-150.jpg">
+      <PackagePath>Assets\video-message-150-150.jpg</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-03-08T14:44:27.866</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\Assets\video-message-24-24.jpg">
+      <PackagePath>Assets\video-message-24-24.jpg</PackagePath>
+      <Modified>2013-03-08T14:44:27.866</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\Assets\video-message-30-30.jpg">
+      <PackagePath>Assets\video-message-30-30.jpg</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2013-03-08T14:44:27.866</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\Assets\video-message-icon.jpg">
+      <PackagePath>Assets\video-message-icon.jpg</PackagePath>
+      <Modified>2013-03-08T14:44:27.882</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\img\eduardoPic.jpg">
       <PackagePath>img\eduardoPic.jpg</PackagePath>
-      <Modified>2013-03-07T21:43:29.439</Modified>
+      <Modified>2013-03-08T14:14:12.170</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\img\ericoPic.jpg">
       <PackagePath>img\ericoPic.jpg</PackagePath>
@@ -82,7 +102,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\img\garbulhoPic.jpg">
       <PackagePath>img\garbulhoPic.jpg</PackagePath>
-      <Modified>2013-03-07T21:43:29.449</Modified>
+      <Modified>2013-03-08T14:44:27.944</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\img\gordoPic.jpg">
       <PackagePath>img\gordoPic.jpg</PackagePath>
@@ -91,6 +111,10 @@
     <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\img\wallacePic.jpg">
       <PackagePath>img\wallacePic.jpg</PackagePath>
       <Modified>2013-03-07T21:43:29.456</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\Common\ReadMe.txt">
+      <PackagePath>Common\ReadMe.txt</PackagePath>
+      <Modified>2013-02-26T18:28:33.415</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\bin\x64\Debug\App.xaml">
       <PackagePath>App.xaml</PackagePath>
@@ -102,7 +126,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\bin\x64\Debug\MainPage.xaml">
       <PackagePath>MainPage.xaml</PackagePath>
-      <Modified>2013-03-06T09:36:46.811</Modified>
+      <Modified>2013-03-08T12:55:43.966</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\bin\x64\Debug\MensagensContato.xaml">
       <PackagePath>MensagensContato.xaml</PackagePath>
@@ -114,7 +138,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\bin\x64\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2013-03-07T22:34:33.957</Modified>
+      <Modified>2013-03-08T15:04:49.304</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

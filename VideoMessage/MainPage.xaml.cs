@@ -47,6 +47,11 @@ namespace VideoMessage
         String pathUpload;
         String downloadAccessPolicyId;
         String pathDownload;
+        String urlAtualDaApi;
+        String urlInicialDaApi = "https://media.windows.net/API/";
+        HttpClientHandler handler;
+        HttpClient httpClient;
+
 
         private MediaExtensionManager extensions = new MediaExtensionManager();
         
@@ -64,6 +69,16 @@ namespace VideoMessage
         {
             extensions.RegisterByteStreamHandler("Microsoft.Media.AdaptiveStreaming.SmoothByteStreamHandler", ".ism", "text/xml");
             extensions.RegisterByteStreamHandler("Microsoft.Media.AdaptiveStreaming.SmoothByteStreamHandler", ".ism", "application/vnd.ms-sstr+xml");
+        }
+
+        private void inicializaElementosHttp()
+        {
+            handler = new HttpClientHandler();
+            handler.AllowAutoRedirect = false;
+            httpClient = new HttpClient(handler);
+            httpClient.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json;odata=verbose"));
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            urlAtualDaApi = "";
         }
 
         private async void startDeviceAndPreview()
@@ -218,6 +233,7 @@ namespace VideoMessage
                     JObject jsonObj = JObject.Parse(responseBodyAsText);
 
                     accessToken = (String) jsonObj["access_token"];
+                    inicializaElementosHttp();
                     criarAssetCall();
                 }
             }
@@ -234,26 +250,19 @@ namespace VideoMessage
 
         private async void criarAssetCall()
         {
+            String strContent = "{'Name': 'AssetVideoMessage'}";
             
-            HttpClientHandler handler = new HttpClientHandler();
-            handler.AllowAutoRedirect = false;
-            HttpClient httpClient = new HttpClient(handler);
-            //httpClient.BaseAddress = new Uri("https://wamsbluclus001rest-hs.cloudapp.net/API/Assets");
-            
-            httpClient.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json;odata=verbose"));
-            HttpRequestMessage req = criaRequest("https://media.windows.net/API/Assets","{'Name': 'AssetVideoMessage'}");
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-            
+            HttpRequestMessage req = criaRequest(urlInicialDaApi + "Assets", strContent);
             HttpResponseMessage response = await httpClient.SendAsync(req);
 
             if (response.StatusCode != HttpStatusCode.MovedPermanently)
             {
                 //Erro
-                return;
             }
             
-            String newLocation = response.Headers.Location.ToString() + "Assets";
-            req = criaRequest(newLocation, "{'Name': 'AssetDeTest'}");
+            urlAtualDaApi = response.Headers.Location.ToString();
+            String urlFinal = urlAtualDaApi + "Assets";
+            req = criaRequest(urlFinal, strContent);
             response = await httpClient.SendAsync(req);
 
             if (response.StatusCode == HttpStatusCode.Created)
@@ -263,35 +272,21 @@ namespace VideoMessage
                 JObject jsonObj = JObject.Parse(responseBodyAsText);
 
                 //POG Nervosa para obter o id
-                assetId = Uri.UnescapeDataString(((String) jsonObj["d"]["__metadata"]["id"]).Replace(newLocation + "('","").Replace("')",""));
-
+                assetId = Uri.UnescapeDataString(((String)jsonObj["d"]["__metadata"]["id"]).Replace(urlFinal + "('", "").Replace("')", ""));
                 criaAccessPolicy();
             }
-
+            else
+            {
+                //Erro
+            }
         }
 
         private async void criaAccessPolicy()
         {
-            HttpClientHandler handler = new HttpClientHandler();
-            handler.AllowAutoRedirect = false;
-            HttpClient httpClient = new HttpClient(handler);
-            //httpClient.BaseAddress = new Uri("https://wamsbluclus001rest-hs.cloudapp.net/API/AccessPolicies");
-
-            httpClient.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json;odata=verbose"));
-            HttpRequestMessage req = criaRequest("https://media.windows.net/API/AccessPolicies", "{'Name': 'NewUploadPolicy', 'DurationInMinutes' : '300', 'Permissions' : 2 }");
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-
+            String strContent = "{'Name': 'NewUploadPolicy', 'DurationInMinutes' : '300', 'Permissions' : 2 }";
+            String urlFinal = urlAtualDaApi + "AccessPolicies";
+            HttpRequestMessage req = criaRequest(urlFinal, strContent);
             HttpResponseMessage response = await httpClient.SendAsync(req);
-
-            if (response.StatusCode != HttpStatusCode.MovedPermanently)
-            {
-                //Erro
-                return;
-            }
-
-            String newLocation = response.Headers.Location.ToString() + "AccessPolicies";
-            req = criaRequest(newLocation, "{'Name': 'NewUploadPolicy', 'DurationInMinutes' : '300', 'Permissions' : 2 }");
-            response = await httpClient.SendAsync(req);
 
             if (response.StatusCode == HttpStatusCode.Created)
             {
@@ -300,36 +295,17 @@ namespace VideoMessage
                 JObject jsonObj = JObject.Parse(responseBodyAsText);
 
                 //POG Nervosa para obter o id
-                accessPolicyId = Uri.UnescapeDataString(((String)jsonObj["d"]["__metadata"]["id"]).Replace(newLocation + "('", "").Replace("')", ""));
-                
-
+                accessPolicyId = Uri.UnescapeDataString(((String)jsonObj["d"]["__metadata"]["id"]).Replace(urlFinal + "('", "").Replace("')", ""));
                 getUrlUpload();
             }
         }
 
         private async void getUrlUpload()
         {
-            HttpClientHandler handler = new HttpClientHandler();
-            handler.AllowAutoRedirect = false;
-            HttpClient httpClient = new HttpClient(handler);
-            //httpClient.BaseAddress = new Uri("https://wamsbluclus001rest-hs.cloudapp.net/API/Locators");
-
-            httpClient.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json;odata=verbose"));
-            String requestStr = "{'AccessPolicyId': '" + accessPolicyId + "', 'AssetId' : '" + assetId + "', 'StartTime' : '" + String.Format("{0:M/d/yyyy h:mm:ss tt}",DateTime.Now.AddMinutes(-5)) + "', 'Type' : 1 }";
-            HttpRequestMessage req = criaRequest("https://media.windows.net/API/Locators", requestStr);
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-
+            String strContent = "{'AccessPolicyId': '" + accessPolicyId + "', 'AssetId' : '" + assetId + "', 'StartTime' : '" + String.Format("{0:M/d/yyyy h:mm:ss tt}",DateTime.Now.AddMinutes(-5)) + "', 'Type' : 1 }";
+            String urlFinal = urlAtualDaApi + "Locators";
+            HttpRequestMessage req = criaRequest(urlFinal, strContent);
             HttpResponseMessage response = await httpClient.SendAsync(req);
-
-            if (response.StatusCode != HttpStatusCode.MovedPermanently)
-            {
-                //Erro
-                return;
-            }
-
-            String newLocation = response.Headers.Location.ToString() + "Locators";
-            req = criaRequest(newLocation, requestStr);
-            response = await httpClient.SendAsync(req);
 
             if (response.StatusCode == HttpStatusCode.Created)
             {
@@ -342,8 +318,6 @@ namespace VideoMessage
                 String[] arrPath = strBrutaPath.Split('?');
                 pathUpload = arrPath[0] + "/video.mp4?" + arrPath[1];
                 uploadVideo();
-
-
             }
         }
 
@@ -353,7 +327,6 @@ namespace VideoMessage
             handler.AllowAutoRedirect = false;
             HttpClient httpClient = new HttpClient(handler);
             
-            //httpClient.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json;odata=verbose"));
             byte[] fileBytes = null;
             using (IRandomAccessStreamWithContentType stream = await m_recordStorageFile.OpenReadAsync())
             {
@@ -385,26 +358,10 @@ namespace VideoMessage
 
         private async void criaDownloadAccessPolicy()
         {
-            HttpClientHandler handler = new HttpClientHandler();
-            handler.AllowAutoRedirect = false;
-            HttpClient httpClient = new HttpClient(handler);
-            //httpClient.BaseAddress = new Uri("https://wamsbluclus001rest-hs.cloudapp.net/API/AccessPolicies");
-
-            httpClient.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json;odata=verbose"));
-            HttpRequestMessage req = criaRequest("https://media.windows.net/API/AccessPolicies", "{'Name': 'DownloadPolicy', 'DurationInMinutes' : '300', 'Permissions' : 1 }");
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-
+            String strContent = "{'Name': 'DownloadPolicy', 'DurationInMinutes' : '300', 'Permissions' : 1 }";
+            String urlFinal = urlAtualDaApi + "AccessPolicies";
+            HttpRequestMessage req = criaRequest(urlFinal, strContent);
             HttpResponseMessage response = await httpClient.SendAsync(req);
-
-            if (response.StatusCode != HttpStatusCode.MovedPermanently)
-            {
-                //Erro
-                return;
-            }
-
-            String newLocation = response.Headers.Location.ToString() + "AccessPolicies";
-            req = criaRequest(newLocation, "{'Name': 'DownloadPolicy', 'DurationInMinutes' : '300', 'Permissions' : 1 }");
-            response = await httpClient.SendAsync(req);
 
             if (response.StatusCode == HttpStatusCode.Created)
             {
@@ -413,8 +370,7 @@ namespace VideoMessage
                 JObject jsonObj = JObject.Parse(responseBodyAsText);
 
                 //POG Nervosa para obter o id
-                downloadAccessPolicyId = Uri.UnescapeDataString(((String)jsonObj["d"]["__metadata"]["id"]).Replace(newLocation + "('", "").Replace("')", ""));
-
+                downloadAccessPolicyId = Uri.UnescapeDataString(((String)jsonObj["d"]["__metadata"]["id"]).Replace(urlFinal + "('", "").Replace("')", ""));
 
                 getUrlDownload();
             }
@@ -422,27 +378,10 @@ namespace VideoMessage
 
         private async void getUrlDownload()
         {
-            HttpClientHandler handler = new HttpClientHandler();
-            handler.AllowAutoRedirect = false;
-            HttpClient httpClient = new HttpClient(handler);
-            //httpClient.BaseAddress = new Uri("https://wamsbluclus001rest-hs.cloudapp.net/API/Locators");
-
-            httpClient.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json;odata=verbose"));
             String requestStr = "{'AccessPolicyId': '" + downloadAccessPolicyId + "', 'AssetId' : '" + assetId + "', 'StartTime' : '" + String.Format("{0:M/d/yyyy h:mm:ss tt}", DateTime.Now.AddMinutes(-5)) + "', 'Type' : 2 }";
-            HttpRequestMessage req = criaRequest("https://media.windows.net/API/Locators", requestStr);
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-
+            String urlFinal = urlAtualDaApi + "Locators";
+            HttpRequestMessage req = criaRequest(urlFinal, requestStr);
             HttpResponseMessage response = await httpClient.SendAsync(req);
-
-            if (response.StatusCode != HttpStatusCode.MovedPermanently)
-            {
-                //Erro
-                return;
-            }
-
-            String newLocation = response.Headers.Location.ToString() + "Locators";
-            req = criaRequest(newLocation, requestStr);
-            response = await httpClient.SendAsync(req);
 
             if (response.StatusCode == HttpStatusCode.Created)
             {

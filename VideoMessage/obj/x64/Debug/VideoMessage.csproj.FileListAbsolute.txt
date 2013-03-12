@@ -65,3 +65,4 @@ C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\
 C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\x64\Debug\MensagensContato.g.cs
 C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\x64\Debug\ContatosList.xaml
 C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\obj\x64\Debug\MensagensContato.xaml
+C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\bin\x64\Debug\Microsoft.WindowsAzure.MobileServices.Managed.dll
