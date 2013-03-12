@@ -38,7 +38,6 @@ namespace VideoMessage
     {
         private MediaCapture m_mediaCaptureMgr;
         private bool m_bRecording;
-        private bool m_bAssistindo;
         private readonly String VIDEO_FILE_NAME = "video.mp4";
         private Windows.Storage.StorageFile m_recordStorageFile;
         String accessToken;
@@ -56,8 +55,6 @@ namespace VideoMessage
             startDeviceAndPreview();
 
             adicionaSuporteAoSmoothStreaming();
-
-            mediaElement.MediaOpened += mediaElement_MediaOpened;
         }
 
         private void adicionaSuporteAoSmoothStreaming()
@@ -229,7 +226,6 @@ namespace VideoMessage
             {
                 
             }
-
         }
 
         private async void criarAssetCall()
@@ -515,37 +511,8 @@ namespace VideoMessage
 
         private async void btnPlayMensagem_Click(object sender, RoutedEventArgs e)
         {
-            //this.Frame.Navigate(typeof(MensagensContato), m_recordStorageFile);
-
-            if (!m_bAssistindo)
-            {
-                //mediaElement.Source = new Uri("http://ecn.channel9.msdn.com/o9/content/smf/smoothcontent/elephantsdream/Elephants_Dream_1024-h264-st-aac.ism/manifest");
-                var stream = await m_recordStorageFile.OpenAsync(Windows.Storage.FileAccessMode.Read);
-                mediaElement.SetSource(stream, m_recordStorageFile.ContentType);
-
-                btnPlayMensagem.Content = "Parar Mensagem";
-                m_bAssistindo = true;
-            }
-            else
-            {
-                m_bAssistindo = false;
-                mediaElement.Stop();
-                btnPlayMensagem.Content = "Ver Mensagem";
-            }
+            this.Frame.Navigate(typeof(MensagensContato), m_recordStorageFile);
         }
-
-        private void mediaElement_MediaOpened(object sender, RoutedEventArgs e)
-        {
-            txtStatus.Text = "MediaElement opened";
-            mediaElement.Play();
-        }
-
-        
-
-        
-
-        
-
         
     }
 }

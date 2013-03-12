@@ -87,7 +87,7 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Name="spMediaElement" Grid.Row="1" Height="480" Width="640" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <MediaElement x:Name="mediaElement" Height="356" Width="924" MinHeight="225" HorizontalAlignment="Center" VerticalAlignment="Center" AudioCategory="BackgroundCapableMedia" AutoPlay="False"/>
+                    <MediaElement x:Name="mediaElement" Height="356" Width="924" MinHeight="225" HorizontalAlignment="Center" VerticalAlignment="Center" AudioCategory="BackgroundCapableMedia" AutoPlay="True"/>
                 </StackPanel>
                 
             </Grid>
