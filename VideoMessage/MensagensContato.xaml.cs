@@ -6,6 +6,7 @@ using VideoMessage.Data;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Media;
+using Windows.Storage;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -33,8 +34,6 @@ namespace VideoMessage
             this.InitializeComponent();
 
             adicionaSuporteAoSmoothStreaming();
-
-            mediaElement.MediaOpened += mediaElement_MediaOpened;
         }
 
         #region Page state management
@@ -43,11 +42,6 @@ namespace VideoMessage
         {
             extensions.RegisterByteStreamHandler("Microsoft.Media.AdaptiveStreaming.SmoothByteStreamHandler", ".ism", "text/xml");
             extensions.RegisterByteStreamHandler("Microsoft.Media.AdaptiveStreaming.SmoothByteStreamHandler", ".ism", "application/vnd.ms-sstr+xml");
-        }
-
-        private void mediaElement_MediaOpened(object sender, RoutedEventArgs e)
-        {
-            mediaElement.Play();
         }
 
         /// <summary>
@@ -59,53 +53,50 @@ namespace VideoMessage
         /// </param>
         /// <param name="pageState">A dictionary of state preserved by this page during an earlier
         /// session.  This will be null the first time a page is visited.</param>
-        protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
+        protected async override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
-
-            if (navigationParameter is String)
+            var group = SampleDataSource.GetGroup("Group-1");
+            if ((navigationParameter is String))
             {
+                group = SampleDataSource.GetGroup((String)navigationParameter);
+            }
+            
+            // TODO: Assign a bindable group to this.DefaultViewModel["Group"]
+            // TODO: Assign a collection of bindable items to this.DefaultViewModel["Items"]
+            this.DefaultViewModel["Group"] = group;
+            this.DefaultViewModel["Items"] = group.Items;
 
-                // TODO: Assign a bindable group to this.DefaultViewModel["Group"]
-                // TODO: Assign a collection of bindable items to this.DefaultViewModel["Items"]
-                var group = SampleDataSource.GetGroup((String)navigationParameter);
-                this.DefaultViewModel["Group"] = group;
-                this.DefaultViewModel["Items"] = group.Items;
-
-                if (pageState == null)
+            if (pageState == null)
+            {
+                this.itemListView.SelectedItem = null;
+                // When this is a new page, select the first item automatically unless logical page
+                // navigation is being used (see the logical page navigation #region below.)
+                if (!this.UsingLogicalPageNavigation() && this.itemsViewSource.View != null)
                 {
-                    this.itemListView.SelectedItem = null;
-                    // When this is a new page, select the first item automatically unless logical page
-                    // navigation is being used (see the logical page navigation #region below.)
-                    if (!this.UsingLogicalPageNavigation() && this.itemsViewSource.View != null)
+                    this.itemsViewSource.View.MoveCurrentToFirst();
+                    if ((navigationParameter is String))
                     {
-                        this.itemsViewSource.View.MoveCurrentToFirst();
                         playVideo();
                     }
-                }
-                else
-                {
-                    // Restore the previously saved state associated with this page
-                    if (pageState.ContainsKey("SelectedItem") && this.itemsViewSource.View != null)
+                    else
                     {
-                        // TODO: Invoke this.itemsViewSource.View.MoveCurrentTo() with the selected
-                        //       item as specified by the value of pageState["SelectedItem"]
-                        var selectedItem = SampleDataSource.GetItem((String)pageState["SelectedItem"]);
-                        this.itemsViewSource.View.MoveCurrentTo(selectedItem);
-
+                        playVideoGravado(navigationParameter);
                     }
+                        
                 }
             }
             else
             {
-                // TODO: Assign a bindable group to this.DefaultViewModel["Group"]
-                // TODO: Assign a collection of bindable items to this.DefaultViewModel["Items"]
-                var group = SampleDataSource.GetGroup("Group-1");
-                this.DefaultViewModel["Group"] = group;
-                this.DefaultViewModel["Items"] = group.Items;
-                this.itemsViewSource.View.MoveCurrentToFirst();
-                playVideoGravado(navigationParameter);
-            }
+                // Restore the previously saved state associated with this page
+                if (pageState.ContainsKey("SelectedItem") && this.itemsViewSource.View != null)
+                {
+                    // TODO: Invoke this.itemsViewSource.View.MoveCurrentTo() with the selected
+                    //       item as specified by the value of pageState["SelectedItem"]
+                    var selectedItem = SampleDataSource.GetItem((String)pageState["SelectedItem"]);
+                    this.itemsViewSource.View.MoveCurrentTo(selectedItem);
 
+                }
+            }
         }
 
         private async void playVideoGravado(object navigationParameter)
@@ -117,13 +108,14 @@ namespace VideoMessage
 
             }
 
-            Windows.Storage.StorageFile m_recordStorageFile = (Windows.Storage.StorageFile) navigationParameter;
+            StorageFile m_recordStorageFile = (Windows.Storage.StorageFile)navigationParameter;
 
-            var stream = await m_recordStorageFile.OpenAsync(Windows.Storage.FileAccessMode.Read);
-            mediaElement.SetSource(stream, m_recordStorageFile.ContentType);
-            mediaElement.Play();
+            StorageFolder storageFolder = KnownFolders.VideosLibrary;
+            StorageFile sampleFile = await storageFolder.GetFileAsync(m_recordStorageFile.Name);
+            var stream = await sampleFile.OpenAsync(Windows.Storage.FileAccessMode.Read);
 
             m_bAssistindo = true;
+            mediaElement.SetSource(stream, m_recordStorageFile.ContentType);
         }
 
         private void ItemListView_MensagemClick(object sender, ItemClickEventArgs e)

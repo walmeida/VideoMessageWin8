@@ -1,1 +1,0 @@
-C:\Users\Wallace\Documents\Trabalho\Vtx\repos\VideoMessageWin8\VideoMessage\VideoMessage.csproj;x64
