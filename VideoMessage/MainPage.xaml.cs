@@ -405,7 +405,7 @@ namespace VideoMessage
 
         private async void encondingJob()
         {
-            String strContent = "{'Name' : 'NewTestJob', 'InputMediaAssets' : [{'__metadata' : {'uri' : \"https://media.windows.net/api/Assets('" + assetId + "')\"}}],  'Tasks' : [{'Configuration' : 'H264 Smooth Streaming SD 4x3', 'MediaProcessorId' : '" + mediaProcessorId + "',  'TaskBody' : ''}]}";
+            String strContent = "{'Name' : 'NewTestJob', 'InputMediaAssets' : [{'__metadata' : {'uri' : \"https://media.windows.net/api/Assets('" + assetId + "')\"}}],  'Tasks' : [{'Configuration' : 'H264 Smooth Streaming SD 4x3', 'MediaProcessorId' : 'nb:mpid:UUID:A2F9AFE9-7146-4882-A5F7-DA4A85E06A93',  'TaskBody' : '<?xml version=\"1.0\" encoding=\"utf-8\"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset>JobOutputAsset(0)</outputAsset></taskBody>'}]}";
             //String strContent = "{'Name' : 'NewTestJob', 'InputMediaAssets' : [{'__metadata' : {'uri' : \"https://media.windows.net/api/Assets('" + assetId + "')\"}}]  }";
             String urlFinal = urlAtualDaApi + "Jobs";
             HttpRequestMessage req = criaRequest(urlFinal, strContent);
