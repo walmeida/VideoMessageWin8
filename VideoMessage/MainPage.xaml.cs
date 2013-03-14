@@ -43,6 +43,8 @@ namespace VideoMessage
         String accessToken;
         String accessPolicyId;
         String assetId;
+        String mediaProcessorId;
+        String jobId;
         String pathUpload;
         String downloadAccessPolicyId;
         String pathDownload;
@@ -348,7 +350,8 @@ namespace VideoMessage
             if (response.StatusCode == HttpStatusCode.Created)
             {
                 //Sucesso
-                criaDownloadAccessPolicy();
+                //criaDownloadAccessPolicy();
+                encondingJob();
             }
         }
 
@@ -374,9 +377,9 @@ namespace VideoMessage
 
         private async void getUrlDownload()
         {
-            String requestStr = "{'AccessPolicyId': '" + downloadAccessPolicyId + "', 'AssetId' : '" + assetId + "', 'StartTime' : '" + String.Format("{0:M/d/yyyy h:mm:ss tt}", DateTime.Now.AddMinutes(-5)) + "', 'Type' : 2 }";
+            String strContent = "{'AccessPolicyId': '" + downloadAccessPolicyId + "', 'AssetId' : '" + assetId + "', 'StartTime' : '" + String.Format("{0:M/d/yyyy h:mm:ss tt}", DateTime.Now.AddMinutes(-5)) + "', 'Type' : 2 }";
             String urlFinal = urlAtualDaApi + "Locators";
-            HttpRequestMessage req = criaRequest(urlFinal, requestStr);
+            HttpRequestMessage req = criaRequest(urlFinal, strContent);
             HttpResponseMessage response = await httpClient.SendAsync(req);
 
             if (response.StatusCode == HttpStatusCode.Created)
@@ -397,6 +400,29 @@ namespace VideoMessage
                 var todoItem = new TodoItem { Text = "Nova mensagem de " + nome, Destinatario = App.dest};
                 InsertTodoItem(todoItem);
 
+            }
+        }
+
+        private async void encondingJob()
+        {
+            String strContent = "{'Name' : 'NewTestJob', 'InputMediaAssets' : [{'__metadata' : {'uri' : \"https://media.windows.net/api/Assets('" + assetId + "')\"}}],  'Tasks' : [{'Configuration' : 'H264 Smooth Streaming SD 4x3', 'MediaProcessorId' : '" + mediaProcessorId + "',  'TaskBody' : ''}]}";
+            //String strContent = "{'Name' : 'NewTestJob', 'InputMediaAssets' : [{'__metadata' : {'uri' : \"https://media.windows.net/api/Assets('" + assetId + "')\"}}]  }";
+            String urlFinal = urlAtualDaApi + "Jobs";
+            HttpRequestMessage req = criaRequest(urlFinal, strContent);
+            HttpResponseMessage response = await httpClient.SendAsync(req);
+
+            String responseBodyAsText = await response.Content.ReadAsStringAsync();
+
+            if (response.StatusCode == HttpStatusCode.Created)
+            {
+                //Sucesso
+                responseBodyAsText = await response.Content.ReadAsStringAsync();
+                JObject jsonObj = JObject.Parse(responseBodyAsText);
+
+                //POG Nervosa para obter o id
+                jobId = ((String)jsonObj["d"]["__metadata"]["id"]).Replace(urlFinal + "('", "").Replace("')", "");
+
+                
             }
         }
 
