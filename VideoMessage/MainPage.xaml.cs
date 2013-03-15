@@ -248,7 +248,7 @@ namespace VideoMessage
 
         private async void criarAssetCall()
         {
-            String strContent = "{'Name': 'AssetVideoMessage'}";
+            String strContent = "{'Name': 'NovoAssetVideoMessage'}";
             
             HttpRequestMessage req = criaRequest(urlInicialDaApi + "Assets", strContent);
             HttpResponseMessage response = await httpClient.SendAsync(req);
@@ -260,7 +260,7 @@ namespace VideoMessage
             
             urlAtualDaApi = response.Headers.Location.ToString();
             String urlFinal = urlAtualDaApi + "Assets";
-            req = criaRequest(urlFinal, strContent);
+            req = criaRequest(HttpMethod.Post, urlFinal, strContent);
             response = await httpClient.SendAsync(req);
 
             if (response.StatusCode == HttpStatusCode.Created)
@@ -283,7 +283,7 @@ namespace VideoMessage
         {
             String strContent = "{'Name': 'NewUploadPolicy', 'DurationInMinutes' : '300', 'Permissions' : 2 }";
             String urlFinal = urlAtualDaApi + "AccessPolicies";
-            HttpRequestMessage req = criaRequest(urlFinal, strContent);
+            HttpRequestMessage req = criaRequest(HttpMethod.Post, urlFinal, strContent);
             HttpResponseMessage response = await httpClient.SendAsync(req);
 
             if (response.StatusCode == HttpStatusCode.Created)
@@ -302,7 +302,7 @@ namespace VideoMessage
         {
             String strContent = "{'AccessPolicyId': '" + accessPolicyId + "', 'AssetId' : '" + assetId + "', 'StartTime' : '" + String.Format("{0:M/d/yyyy h:mm:ss tt}",DateTime.Now.AddMinutes(-5)) + "', 'Type' : 1 }";
             String urlFinal = urlAtualDaApi + "Locators";
-            HttpRequestMessage req = criaRequest(urlFinal, strContent);
+            HttpRequestMessage req = criaRequest(HttpMethod.Post, urlFinal, strContent);
             HttpResponseMessage response = await httpClient.SendAsync(req);
 
             if (response.StatusCode == HttpStatusCode.Created)
@@ -351,7 +351,8 @@ namespace VideoMessage
             {
                 //Sucesso
                 //criaDownloadAccessPolicy();
-                encondingJob();
+                //encondingJob();
+                generateFileEntity();
             }
         }
 
@@ -359,7 +360,7 @@ namespace VideoMessage
         {
             String strContent = "{'Name': 'DownloadPolicy', 'DurationInMinutes' : '300', 'Permissions' : 1 }";
             String urlFinal = urlAtualDaApi + "AccessPolicies";
-            HttpRequestMessage req = criaRequest(urlFinal, strContent);
+            HttpRequestMessage req = criaRequest(HttpMethod.Post, urlFinal, strContent);
             HttpResponseMessage response = await httpClient.SendAsync(req);
 
             if (response.StatusCode == HttpStatusCode.Created)
@@ -379,7 +380,7 @@ namespace VideoMessage
         {
             String strContent = "{'AccessPolicyId': '" + downloadAccessPolicyId + "', 'AssetId' : '" + assetId + "', 'StartTime' : '" + String.Format("{0:M/d/yyyy h:mm:ss tt}", DateTime.Now.AddMinutes(-5)) + "', 'Type' : 2 }";
             String urlFinal = urlAtualDaApi + "Locators";
-            HttpRequestMessage req = criaRequest(urlFinal, strContent);
+            HttpRequestMessage req = criaRequest(HttpMethod.Post, urlFinal, strContent);
             HttpResponseMessage response = await httpClient.SendAsync(req);
 
             if (response.StatusCode == HttpStatusCode.Created)
@@ -403,12 +404,28 @@ namespace VideoMessage
             }
         }
 
+        private async void generateFileEntity()
+        {
+            String strContent = "";
+            String urlFinal = urlAtualDaApi + "CreateFileInfos?assetid='" + Uri.EscapeDataString(assetId) + "'";
+            HttpRequestMessage req = criaRequest(HttpMethod.Get, urlFinal, strContent);
+            HttpResponseMessage response = await httpClient.SendAsync(req);
+
+            String responseBodyAsText = await response.Content.ReadAsStringAsync();
+
+            if (response.StatusCode == HttpStatusCode.NoContent)
+            {
+                //Sucesso
+                encondingJob();
+            }
+        }
+
         private async void encondingJob()
         {
-            String strContent = "{'Name' : 'NewTestJob', 'InputMediaAssets' : [{'__metadata' : {'uri' : \"https://media.windows.net/api/Assets('" + assetId + "')\"}}],  'Tasks' : [{'Configuration' : 'H264 Smooth Streaming SD 4x3', 'MediaProcessorId' : 'nb:mpid:UUID:A2F9AFE9-7146-4882-A5F7-DA4A85E06A93',  'TaskBody' : '<?xml version=\"1.0\" encoding=\"utf-8\"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset>JobOutputAsset(0)</outputAsset></taskBody>'}]}";
+            String strContent = "{'Name' : 'NewTestJob', 'InputMediaAssets' : [{'__metadata' : {'uri' : \"https://media.windows.net/api/Assets('nb%3Acid%3AUUID%3A17640c51-1a1f-4ac6-9e3e-796dea18997d')\"}}],  'Tasks' : [{'Configuration' : 'H264 Smooth Streaming SD 4x3', 'MediaProcessorId' : 'nb:mpid:UUID:A2F9AFE9-7146-4882-A5F7-DA4A85E06A93',  'TaskBody' : '<?xml version=\"1.0\" encoding=\"utf-8\"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset>JobOutputAsset(0)</outputAsset></taskBody>'}]}";
             //String strContent = "{'Name' : 'NewTestJob', 'InputMediaAssets' : [{'__metadata' : {'uri' : \"https://media.windows.net/api/Assets('" + assetId + "')\"}}]  }";
             String urlFinal = urlAtualDaApi + "Jobs";
-            HttpRequestMessage req = criaRequest(urlFinal, strContent);
+            HttpRequestMessage req = criaRequest(HttpMethod.Post, urlFinal, strContent);
             HttpResponseMessage response = await httpClient.SendAsync(req);
 
             String responseBodyAsText = await response.Content.ReadAsStringAsync();
@@ -416,20 +433,21 @@ namespace VideoMessage
             if (response.StatusCode == HttpStatusCode.Created)
             {
                 //Sucesso
-                responseBodyAsText = await response.Content.ReadAsStringAsync();
+                //responseBodyAsText = await response.Content.ReadAsStringAsync();
                 JObject jsonObj = JObject.Parse(responseBodyAsText);
 
                 //POG Nervosa para obter o id
                 jobId = ((String)jsonObj["d"]["__metadata"]["id"]).Replace(urlFinal + "('", "").Replace("')", "");
-
+                criaDownloadAccessPolicy();
                 
             }
         }
 
-        private HttpRequestMessage criaRequest(String url, String strContent)
+        private HttpRequestMessage criaRequest(HttpMethod verb, String url, String strContent)
         {
-            HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Post, url);
-            req.Content = new StringContent(strContent);
+            HttpRequestMessage req = new HttpRequestMessage(verb, url);
+            if(strContent != "")
+                req.Content = new StringContent(strContent);
             req.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json;odata=verbose");
             req.Content.Headers.Add("DataServiceVersion", "3.0");
             req.Content.Headers.Add("MaxDataServiceVersion", "3.0");
