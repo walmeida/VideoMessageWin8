@@ -250,7 +250,7 @@ namespace VideoMessage
         {
             String strContent = "{'Name': 'NovoAssetVideoMessage'}";
             
-            HttpRequestMessage req = criaRequest(urlInicialDaApi + "Assets", strContent);
+            HttpRequestMessage req = criaRequest(HttpMethod.Post ,urlInicialDaApi + "Assets", strContent);
             HttpResponseMessage response = await httpClient.SendAsync(req);
 
             if (response.StatusCode != HttpStatusCode.MovedPermanently)
@@ -408,7 +408,22 @@ namespace VideoMessage
         {
             String strContent = "";
             String urlFinal = urlAtualDaApi + "CreateFileInfos?assetid='" + Uri.EscapeDataString(assetId) + "'";
-            HttpRequestMessage req = criaRequest(HttpMethod.Get, urlFinal, strContent);
+            //HttpRequestMessage req = criaRequest(HttpMethod.Get, urlFinal, strContent);
+            //req.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json;odata=verbose");
+            //req.Content.Headers.Add("DataServiceVersion", "3.0");
+            //req.Content.Headers.Add("MaxDataServiceVersion", "3.0");
+            //req.Content.Headers.Add("x-ms-version", "2.0");
+
+            HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Get, urlFinal);
+            //req.Content = new StringContent(
+            //req.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json;odata=verbose");
+            //req.Content.Headers.Add("DataServiceVersion", "3.0");
+            //req.Content.Headers.Add("MaxDataServiceVersion", "3.0");
+            //req.Content.Headers.Add("x-ms-version", "2.0");
+            req.Headers.Add("DataServiceVersion", "3.0");
+            req.Headers.Add("MaxDataServiceVersion", "3.0");
+            req.Headers.Add("x-ms-version", "2.0");
+
             HttpResponseMessage response = await httpClient.SendAsync(req);
 
             String responseBodyAsText = await response.Content.ReadAsStringAsync();
@@ -422,7 +437,7 @@ namespace VideoMessage
 
         private async void encondingJob()
         {
-            String strContent = "{'Name' : 'NewTestJob', 'InputMediaAssets' : [{'__metadata' : {'uri' : \"https://media.windows.net/api/Assets('nb%3Acid%3AUUID%3A17640c51-1a1f-4ac6-9e3e-796dea18997d')\"}}],  'Tasks' : [{'Configuration' : 'H264 Smooth Streaming SD 4x3', 'MediaProcessorId' : 'nb:mpid:UUID:A2F9AFE9-7146-4882-A5F7-DA4A85E06A93',  'TaskBody' : '<?xml version=\"1.0\" encoding=\"utf-8\"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset>JobOutputAsset(0)</outputAsset></taskBody>'}]}";
+            String strContent = "{'Name' : 'NewTestJob', 'InputMediaAssets' : [{'__metadata' : {'uri' : \"https://media.windows.net/api/Assets('" + assetId +"')\"}}],  'Tasks' : [{'Configuration' : 'H264 Smooth Streaming SD 4x3', 'MediaProcessorId' : 'nb:mpid:UUID:A2F9AFE9-7146-4882-A5F7-DA4A85E06A93',  'TaskBody' : '<?xml version=\"1.0\" encoding=\"utf-8\"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset>JobOutputAsset(0)</outputAsset></taskBody>'}]}";
             //String strContent = "{'Name' : 'NewTestJob', 'InputMediaAssets' : [{'__metadata' : {'uri' : \"https://media.windows.net/api/Assets('" + assetId + "')\"}}]  }";
             String urlFinal = urlAtualDaApi + "Jobs";
             HttpRequestMessage req = criaRequest(HttpMethod.Post, urlFinal, strContent);
@@ -446,8 +461,7 @@ namespace VideoMessage
         private HttpRequestMessage criaRequest(HttpMethod verb, String url, String strContent)
         {
             HttpRequestMessage req = new HttpRequestMessage(verb, url);
-            if(strContent != "")
-                req.Content = new StringContent(strContent);
+            req.Content = new StringContent(strContent);
             req.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json;odata=verbose");
             req.Content.Headers.Add("DataServiceVersion", "3.0");
             req.Content.Headers.Add("MaxDataServiceVersion", "3.0");
